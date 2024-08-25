@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="PocAutomacaoAcessibilidade.Domain\Interfaces\Infra\" />
+    <Folder Include="PocAutomacaoAcessibilidade.Infra\" />
+    <Folder Include="PocAutomacaoAcessibilidade.Aplication\Services\" />
+    <Folder Include="PocAutomacaoAcessibilidade.Configurations\" />
+    <Folder Include="PocAutomacaoAcessibilidade.Domain\DDTOS\" />
+    <Folder Include="PocAutomacaoAcessibilidade.Domain\Interfaces\Services\" />
+  </ItemGroup>
+
+</Project>
