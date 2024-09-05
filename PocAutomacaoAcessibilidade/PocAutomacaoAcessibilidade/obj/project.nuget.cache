@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "gFxutMeLvrhZc2cUeZalkxXwgKIEZeX/CthZN7ETKxERz7ErJlNCwgdb08lVzF1foOtTWQ9S/GDqUolMvgGVlg==",
+  "dgSpecHash": "mW42R66kPWl5zUrVCIMXrgs6J6056ZOf2egUkZ7QWo0qe+ip9uukhTt9Gh97W6Ivskq/r+1cvn1E5XqQREm03w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dell\\.nuget\\packages\\htmlagilitypack\\1.11.60\\htmlagilitypack.1.11.60.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\selenium.axe\\4.0.18\\selenium.axe.4.0.18.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\selenium.webdriver\\4.23.0\\selenium.webdriver.4.23.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\selenium.webdriver.chromedriver\\128.0.6613.11900\\selenium.webdriver.chromedriver.128.0.6613.11900.nupkg.sha512"
+  ],
   "logs": []
 }

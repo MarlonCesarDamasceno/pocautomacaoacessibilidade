@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj": {}
+    "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj": {
+    "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
+        "projectUniqueName": "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
         "projectName": "PocAutomacaoAcessibilidade",
-        "projectPath": "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
+        "projectPath": "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dell\\source\\repos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\obj\\",
+        "outputPath": "C:\\Users\\Dell\\Documents\\Projetos\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\PocAutomacaoAcessibilidade\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -42,6 +42,24 @@
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Selenium.Axe": {
+              "target": "Package",
+              "version": "[4.0.18, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.23.0, )"
+            },
+            "Selenium.WebDriver.ChromeDriver": {
+              "target": "Package",
+              "version": "[128.0.6613.11900, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
