@@ -10,6 +10,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS
 {
     public class ResultadoValidacao
     {
+        public StatusTesteEnum StatusTestes { get; set; }
         public string IdErro { get; set; }
         public string Descricao { get; set; }
         public string Impacto { get; set; }
