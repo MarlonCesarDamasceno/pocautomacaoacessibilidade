@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interface
 {
     public interface IMotorAcessibilidadeService
     {
+        Task<AnalisePreviaResultadoTeste> IniciarTeste(string urlServico);
     }
 }
