@@ -46,3 +46,11 @@ C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibi
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\System.Text.Encoding.CodePages.dll
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\System.Text.Encodings.Web.dll
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\System.Text.Json.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.Console.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\System.Diagnostics.DiagnosticSource.dll

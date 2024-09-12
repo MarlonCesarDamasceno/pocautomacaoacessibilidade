@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.Extensions.Logging;
+using OfficeOpenXml;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS.Relatorios;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Enuns;
@@ -14,6 +15,12 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 {
     public class RelatorioService : IRelatorioService
     {
+        private readonly ILogger<RelatorioService> _logger;
+
+        public RelatorioService(ILogger<RelatorioService> logger)
+        {
+            _logger = logger;
+        }
 
         public List<AnalisePreviaResultadoTeste> GerarBaseRelatorio(List<ResultadoValidacao> resultadoValidacaos)
         {
@@ -115,39 +122,64 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
         public bool ExportarRelatorioParaExcel(List<ResultadoValidacao> validacoes)
         {
+            _logger.LogInformation("Iniciando importação para excel.");
 
             var primeiraPaginaRelatorio = validacoes.Min(x => x.QuantidadeTestePorDominio);
             var ultimaPaginaRelatorio = validacoes.Max(x => x.QuantidadeTestePorDominio);
-            int linha = 5;
-            int ct = 1;
+            int linha = 0;
+            int ct = 0;
+
+            _logger.LogInformation($"Primeira página: {primeiraPaginaRelatorio}. Ultima página: {ultimaPaginaRelatorio}");
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var excel = new ExcelPackage())
             {
 
                 for (int i = primeiraPaginaRelatorio; i <= ultimaPaginaRelatorio; i++)
-            {
-                var filtroPaginaRelatorio = validacoes.Where(x => x.QuantidadeTestePorDominio == i);
-                string nomeAbaRelatorio = filtroPaginaRelatorio.Select(x => x.ServicoTestado).FirstOrDefault();
-
+                {
+                    var filtroPaginaRelatorio = validacoes.Where(x => x.QuantidadeTestePorDominio == i).ToList();
+                    string nomeAbaRelatorio = filtroPaginaRelatorio.Select(x => x.ServicoTestado).FirstOrDefault();
+                    _logger.LogInformation($"Serviço testado: {filtroPaginaRelatorio.FirstOrDefault().ServicoTestado}. Página atual: {filtroPaginaRelatorio.FirstOrDefault().QuantidadeTestePorDominio}");
+                
                     try
                     {
-                        ExcelWorksheet plan = excel.Workbook.Worksheets.Add("Relatorio Automação Acessibilidade");
+                        _logger.LogInformation($"Criando nova aba de resultados: Serviço testado: {filtroPaginaRelatorio.FirstOrDefault().ServicoTestado}. Página atual: {filtroPaginaRelatorio.FirstOrDefault().QuantidadeTestePorDominio} nova aba: {nomeAbaRelatorio}");
+                        ExcelWorksheet plan = excel.Workbook.Worksheets.Add(nomeAbaRelatorio);
                         CriarAbaRelatorio(plan, nomeAbaRelatorio);
                         CriarHeaderColunas(plan);
+                        _logger.LogInformation("Definindo contador de linhas e casos de testes para posição inicial. 4 e 1.");
+                        ct = 1;
+                        linha = 5;
 
                         foreach (var itensResultados in filtroPaginaRelatorio)
                         {
+                            _logger.LogInformation($"Iniciando iteracao do foreach para obter resultado filtrado. {itensResultados.ServicoTestado}.  {itensResultados.QuantidadeTestePorDominio}");
                             if (itensResultados.IDErroComponente.Count == 0)
                             {
+                                _logger.LogInformation($"{itensResultados.IDErroComponente.Count}. Preencher excel com valores de erros principais.");
                                 PreencherRelatorio(plan, linha, ct, itensResultados.IdErro, itensResultados.Descricao, ConcatenarMensagens(itensResultados.HTML), "N/A", itensResultados.Descricao, itensResultados.Impacto, DefinirStatusTeste(itensResultados.StatusTestes));
                                 linha++;
                                 ct++;
                             }
+                            else if(itensResultados.HTML.Count==itensResultados.Seletor.Count &&itensResultados.HTML.Count !=itensResultados.IDErroComponente.Count)
+                            {
+                                    _logger.LogInformation($"{itensResultados.HTML.Count}. Preencher excel com valores de html e seletor fixo pois há apenas um item dentro do array retornado.");
+                                for (int obterResultadosPorComponentes = 0; obterResultadosPorComponentes <= itensResultados.IDErroComponente.Count - 1; obterResultadosPorComponentes++)
+                                {
+                                    _logger.LogInformation($"Iniciado preencher dados por valores de componentes. Quantidades: idComponentes: {itensResultados.IDErroComponente.Count}, impacto: {itensResultados.ImpactoErroComponente.Count}, mensagem: {itensResultados.Mensagem.Count}, html: {itensResultados.HTML.Count}, seletor: {itensResultados.Seletor.Count}, idErro: {itensResultados.IDErroComponente.Count}. iteração atual: {obterResultadosPorComponentes}");
+
+                                    PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], ConcatenarMensagens(itensResultados.HTML), ConcatenarMensagens(itensResultados.Seletor), itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes));
+                                    linha++;
+                                    ct++;
+
+                                }
+                            }
                             else
                             {
-                                for (int obterResultadosPorComponentes = 0; obterResultadosPorComponentes <= itensResultados.IDErroComponente.Count-1; obterResultadosPorComponentes++)
+                                for (int obterResultadosPorComponentes = 0; obterResultadosPorComponentes <= itensResultados.IDErroComponente.Count - 1; obterResultadosPorComponentes++)
                                 {
+                                    _logger.LogInformation($"Iniciado preencher dados por valores de componentes. Quantidades: idComponentes: {itensResultados.IDErroComponente.Count}, impacto: {itensResultados.ImpactoErroComponente.Count}, mensagem: {itensResultados.Mensagem.Count}, html: {itensResultados.HTML.Count}, seletor: {itensResultados.Seletor.Count}, idErro: {itensResultados.IDErroComponente.Count}. iteração atual: {obterResultadosPorComponentes}");
+
                                     PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], itensResultados.HTML[obterResultadosPorComponentes], itensResultados.Seletor[obterResultadosPorComponentes], itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes));
                                     linha++;
                                     ct++;
@@ -158,6 +190,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                     }
                     catch (Exception ex)
                     {
+                        _logger.LogInformation("Falhou.");
                         throw new ArgumentException(ex.Message);
                     }
                     SalvarPlanilha(excel, "RelatorioAcessibilidade");
@@ -219,8 +252,10 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
         private void SalvarPlanilha(ExcelPackage package, string nomeArquivo)
         {
+            
             FileInfo file = new FileInfo(@"C:\Users\Dell\Documents\" + nomeArquivo + ".xlsx");
             package.SaveAs(file);
+            _logger.LogInformation("Planilha salva");
 
         }
 
