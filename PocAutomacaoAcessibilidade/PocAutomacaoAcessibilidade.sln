@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.35026.282
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocAutomacaoAcessibilidade", "PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade.csproj", "{E58184B6-3149-4717-9E91-7230E2B0604A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocAutomacaoAcessibilidade", "PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade.csproj", "{E58184B6-3149-4717-9E91-7230E2B0604A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

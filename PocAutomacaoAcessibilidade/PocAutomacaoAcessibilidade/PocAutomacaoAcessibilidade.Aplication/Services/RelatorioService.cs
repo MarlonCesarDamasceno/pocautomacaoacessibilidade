@@ -114,7 +114,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
                 }
                 relatorioBasico.Add(baseRelatorio);
-                baseRelatorio = null;
+                
 
             }
             return relatorioBasico;
@@ -157,7 +157,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                             if (itensResultados.IDErroComponente.Count == 0)
                             {
                                 _logger.LogInformation($"{itensResultados.IDErroComponente.Count}. Preencher excel com valores de erros principais.");
-                                PreencherRelatorio(plan, linha, ct, itensResultados.IdErro, itensResultados.Descricao, ConcatenarMensagens(itensResultados.HTML), "N/A", itensResultados.Descricao, itensResultados.Impacto, DefinirStatusTeste(itensResultados.StatusTestes));
+                                PreencherRelatorio(plan, linha, ct, itensResultados.IdErro, itensResultados.Descricao, ConcatenarMensagens(itensResultados.HTML), "N/A", itensResultados.Descricao, itensResultados.Impacto, DefinirStatusTeste(itensResultados.StatusTestes), itensResultados.DiretrizWCAG, itensResultados.PilarWCAG, itensResultados.TipoProblema);
                                 linha++;
                                 ct++;
                             }
@@ -168,7 +168,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                                 {
                                     _logger.LogInformation($"Iniciado preencher dados por valores de componentes. Quantidades: idComponentes: {itensResultados.IDErroComponente.Count}, impacto: {itensResultados.ImpactoErroComponente.Count}, mensagem: {itensResultados.Mensagem.Count}, html: {itensResultados.HTML.Count}, seletor: {itensResultados.Seletor.Count}, idErro: {itensResultados.IDErroComponente.Count}. iteração atual: {obterResultadosPorComponentes}");
 
-                                    PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], ConcatenarMensagens(itensResultados.HTML), ConcatenarMensagens(itensResultados.Seletor), itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes));
+                                    PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], ConcatenarMensagens(itensResultados.HTML), ConcatenarMensagens(itensResultados.Seletor), itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes), itensResultados.DiretrizWCAG, itensResultados.PilarWCAG, itensResultados.TipoProblema);
                                     linha++;
                                     ct++;
 
@@ -180,7 +180,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                                 {
                                     _logger.LogInformation($"Iniciado preencher dados por valores de componentes. Quantidades: idComponentes: {itensResultados.IDErroComponente.Count}, impacto: {itensResultados.ImpactoErroComponente.Count}, mensagem: {itensResultados.Mensagem.Count}, html: {itensResultados.HTML.Count}, seletor: {itensResultados.Seletor.Count}, idErro: {itensResultados.IDErroComponente.Count}. iteração atual: {obterResultadosPorComponentes}");
 
-                                    PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], itensResultados.HTML[obterResultadosPorComponentes], itensResultados.Seletor[obterResultadosPorComponentes], itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes));
+                                    PreencherRelatorio(plan, linha, ct, itensResultados.IDErroComponente[obterResultadosPorComponentes], itensResultados.Mensagem[obterResultadosPorComponentes], itensResultados.HTML[obterResultadosPorComponentes], itensResultados.Seletor[obterResultadosPorComponentes], itensResultados.Descricao, itensResultados.ImpactoErroComponente[obterResultadosPorComponentes], DefinirStatusTeste(itensResultados.StatusTestes), itensResultados.DiretrizWCAG, itensResultados.PilarWCAG, itensResultados.TipoProblema);
                                     linha++;
                                     ct++;
                                 }
@@ -193,7 +193,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                         _logger.LogInformation("Falhou.");
                         throw new ArgumentException(ex.Message);
                     }
-                    SalvarPlanilha(excel, "RelatorioAcessibilidade");
+                    SalvarPlanilha(excel, validacoes.FirstOrDefault().ServicoTestado);
                 }
             }
             return true;
@@ -201,21 +201,21 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
         private ExcelWorksheet CriarAbaRelatorio(ExcelWorksheet plan, string nomeServicoTestado)
         {
-            plan.Cells["a1"].Value = "M6 Acessibilidade relatório completo";
+            plan.Cells["a1"].Value = "MCD Acessibilidade relatório completo";
             plan.Cells["a2"].Value = "Serviço analisado";
             plan.Cells["a3"].Value = "Data";
-            plan.Cells["d2"].Value = nomeServicoTestado;
-            plan.Cells["d3"].Value = System.DateTime.Now.ToString("AA/mm/AAAA");
-            plan.Cells["a1:h1"].Merge = true;
+            plan.Cells["g2"].Value = nomeServicoTestado;
+            plan.Cells["g3"].Value = System.DateTime.Now.ToString("dd/MM/AAAA");
+            plan.Cells["a1:l1"].Merge = true;
             plan.Cells["a1"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            plan.Cells["a2:c2"].Merge = true;
+            plan.Cells["a2:f2"].Merge = true;
             plan.Cells["a2"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            plan.Cells["d2:h2"].Merge = true;
-            plan.Cells["d2"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            plan.Cells["a3:c3"].Merge = true;
+            plan.Cells["g2:l2"].Merge = true;
+            plan.Cells["g2"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            plan.Cells["a3:f3"].Merge = true;
             plan.Cells["a3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            plan.Cells["d3:h3"].Merge = true;
-            plan.Cells["d3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            plan.Cells["g3:l3"].Merge = true;
+            plan.Cells["g3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
 
             return plan;
         }
@@ -231,12 +231,16 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells["f4"].Value = "Descrição";
             plan.Cells["g4"].Value = "Impacto";
             plan.Cells["h4"].Value = "Status do teste";
+            plan.Cells["i4"].Value = "Diretriz WCAG";
+            plan.Cells["j4"].Value = "Pilar WCAG";
+            plan.Cells["k4"].Value = "Categoria";
+            plan.Cells["l4"].Value = "Data hora teste";
 
             return plan;
         }
 
 
-        private ExcelWorksheet PreencherRelatorio(ExcelWorksheet plan, int linha, int CT, string Id, string descricaoGeral, string componente, string seletorComponente, string descricao, string impacto, string statusTeste)
+        private ExcelWorksheet PreencherRelatorio(ExcelWorksheet plan, int linha, int CT, string Id, string descricaoGeral, string componente, string seletorComponente, string descricao, string impacto, string statusTeste, string diretrizWcag, string pilarWcag, string categoria)
         {
             plan.Cells[$"a{linha}"].Value = $"CT{CT}";
             plan.Cells[$"b{linha}"].Value = Id;
@@ -246,15 +250,22 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells[$"f{linha}"].Value = descricao;
             plan.Cells[$"g{linha}"].Value = impacto;
             plan.Cells[$"h{linha}"].Value = statusTeste;
+            plan.Cells[$"i{linha}"].Value = diretrizWcag;
+            plan.Cells[$"j{linha}"].Value = pilarWcag;
+            plan.Cells[$"k{linha}"].Value = categoria;
+            plan.Cells[$"l{linha}"].Value = System.DateTime.Now.ToString("dd/MM/AAAA HH:MM:ss");
 
             return plan;
         }
 
-        private void SalvarPlanilha(ExcelPackage package, string nomeArquivo)
+        private void SalvarPlanilha(ExcelPackage package, string url)
         {
-            
-            FileInfo file = new FileInfo(@"C:\Users\Dell\Documents\" + nomeArquivo + ".xlsx");
-            package.SaveAs(file);
+            var dataAtual = System.DateTime.Now.ToString("dd-MM-aaaa-HH-mm");
+
+            var nomeArquivo = "RelatorioAcessibilidade_" + Utils.Utils.ExtrairNomeDominiio(url) + "_" +dataAtual+ ".xlsx";
+
+            FileInfo file = new FileInfo(@"C:\Users\Dell\Documents\" + nomeArquivo);
+                package.SaveAs(file);
             _logger.LogInformation("Planilha salva");
 
         }
