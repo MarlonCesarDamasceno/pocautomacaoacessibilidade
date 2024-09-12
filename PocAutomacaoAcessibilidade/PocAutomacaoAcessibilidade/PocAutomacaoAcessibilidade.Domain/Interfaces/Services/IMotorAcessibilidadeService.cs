@@ -9,6 +9,6 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interface
 {
     public interface IMotorAcessibilidadeService
     {
-        Task<AnalisePreviaResultadoTeste> IniciarTeste(string urlServico);
+        Task<ResultadosTestes> IniciarTeste(string urlServico, string subDominio);
     }
 }

@@ -15,19 +15,24 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
 {
     public partial class M6Acessibilidade : Form
     {
+        private List<ResultadoValidacao> relatorioFinal = new List<ResultadoValidacao>();
         private readonly IMotorAcessibilidadeService _motorAcessibilidadeService;
+        private readonly IRelatorioService _relatorioService;
         private Label lblUrl;
         private TextBox txtUrl;
+        private Label lblsubDominios;
+        private TextBox txtSubDominio;
         private RichTextBox ResultadosTestes;
         private Button btnIniciarTeste;
         private Button btnExportarRelatorio;
-        public M6Acessibilidade(IMotorAcessibilidadeService motorAcessibilidadeService)
+        public M6Acessibilidade(IMotorAcessibilidadeService motorAcessibilidadeService, IRelatorioService relatorioService)
         {
             _motorAcessibilidadeService = motorAcessibilidadeService;
-            
+            _relatorioService = relatorioService;
+
             InitializeComponent();
             IniciarTela();
-            
+
         }
 
         private void IniciarTela()
@@ -37,22 +42,24 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             this.Height = 500;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            
+
             lblUrl = new Label();
             lblUrl.Text = "Url do serviço que será testado:";
             lblUrl.Top = 20;
             lblUrl.Left = 10;
             lblUrl.Width = 200;
 
-            
+
             txtUrl = new TextBox();
             txtUrl.Top = 50;
             txtUrl.Left = 10;
             txtUrl.Width = 400;
             txtUrl.Text = "https://";
-            
 
-            
+            lblsubDominios = new Label();
+            lblsubDominios.Text = "Se houver subdominios, digite separados por vírgulas. exemplo produto,cadastrar-novoproduto,entrar";
+
+            txtSubDominio = new TextBox();
             btnIniciarTeste = new Button();
             btnIniciarTeste.Text = "Iniciar Teste";
             btnIniciarTeste.Top = 90;
@@ -82,39 +89,51 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             btnExportarRelatorio.Top = 320;
             btnExportarRelatorio.Left = 10;
             btnExportarRelatorio.Width = 150;
-            //btnExportarRelatorio.Click += ExportarRelatorio;
+            btnExportarRelatorio.Click +=new EventHandler(ExportarRelatorio);
 
 
             this.Controls.Add(lblUrl);
             this.Controls.Add(txtUrl);
+            this.Controls.Add(lblsubDominios);
+            this.Controls.Add(txtSubDominio);
             this.Controls.Add(btnIniciarTeste);
             this.Controls.Add(ResultadosTestes);
             this.Controls.Add(btnExportarRelatorio);
-            
+
 
         }
 
         private async Task IniciarTesteAsync()
         {
             MessageBox.Show($"Atenção, o teste está sendo iniciado para o serviço {txtUrl.Text}");
-            var resultadosTestes = await _motorAcessibilidadeService.IniciarTeste(txtUrl.Text);
+            var resultadosTestes = await _motorAcessibilidadeService.IniciarTeste(txtUrl.Text, txtSubDominio.Text);
             GerarRelatorioResultadoTeste(resultadosTestes);
         }
 
-        private void GerarRelatorioResultadoTeste(AnalisePreviaResultadoTeste analiseResultados)
+        private void GerarRelatorioResultadoTeste(ResultadosTestes resultados)
         {
             ResultadosTestes.Clear();
+            relatorioFinal = resultados.resultadosValidacoes;
+            foreach (var analiseResultados in resultados.analisesPreliminaresValidacoes)
+            {
 
-            ResultadosTestes.AppendText("M6Acessibilidade\n\n");
-            ResultadosTestes.SelectionFont=new Font("arial", 14, FontStyle.Bold);
-            ResultadosTestes.AppendText("Resumo  do teste realizado\n\n");
-            ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
 
-            ResultadosTestes.AppendText($"Data: {System.DateTime.Now.ToString("dd/MM/yyyy HH:MM:ss")}\nSite analizado: {txtUrl.Text}\n\n");
-            ResultadosTestes.AppendText($"Quantidade de componentes que não passaram no teste: {analiseResultados.Falhas}\nQuantidade de impactos críticos: {analiseResultados.ImpactoCritico}\nQuantidade de impactos moderados: {analiseResultados.ImpactoModerado}\nQuantidades de impactos sérios: {analiseResultados.ImpactoSerio}\nQuantidade de impactos baixos: {analiseResultados.ImpactoBaixo}.");
-            ResultadosTestes.AppendText($"Análise de falha por diretrizes da WCAG \n\n Contrastes: {analiseResultados.RelateContrast} apontamentos.\n Aria-role: {analiseResultados.RelateAriaRoles} apontamentos.\nImagens: {analiseResultados.RelateImagem} apontamentos.\nEstrutura: {analiseResultados.RelateDocEstrutura} apontamentos.\nFormulários: {analiseResultados.RelateForm}. apontamentos.\nIdioma: {analiseResultados.RelateLang}.apontamento.\nLinks: {analiseResultados.RelateLink} apontamentos.\nTeclado: {analiseResultados.RelateTeclado} apontamentos.\n");
-            ResultadosTestes.AppendText($"Status de casos de sucessos e dados que não puderam ser testados.\n\nQuantidade de componentes que passaram no teste: {analiseResultados.Sucessos}.\nQuantidade de dados que não estão aplicados para testes: {analiseResultados.NaoAplicados}.\nQuantidade de testes incompletos: {analiseResultados.Incompletos}.\n\nPara ter acesso completo em quais componentes causaram as falhas, exporte o relatório detalhado para conferir os itens que não passaram no teste.");
-            
+                ResultadosTestes.AppendText("M6Acessibilidade\n\n");
+                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Bold);
+                ResultadosTestes.AppendText("Resumo  do teste realizado\n\n");
+                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
+
+                ResultadosTestes.AppendText($"Data: {System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}\nSite analizado: {analiseResultados.ServicoTestado}\n\n");
+                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
+                ResultadosTestes.AppendText($"Quantidade de componentes que não passaram no teste: {analiseResultados.Falhas}\nQuantidade de impactos críticos: {analiseResultados.ImpactoCritico}\nQuantidade de impactos moderados: {analiseResultados.ImpactoModerado}\nQuantidades de impactos sérios: {analiseResultados.ImpactoSerio}\nQuantidade de impactos baixos: {analiseResultados.ImpactoBaixo}.\n");
+                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
+                ResultadosTestes.AppendText($"Análise de falha por diretrizes da WCAG \n\nContrastes: {analiseResultados.RelateContrast} apontamentos.\n Aria-role: {analiseResultados.RelateAriaRoles} apontamentos.\nImagens: {analiseResultados.RelateImagem} apontamentos.\nEstrutura: {analiseResultados.RelateDocEstrutura} apontamentos.\nFormulários: {analiseResultados.RelateForm}. apontamentos.\nIdioma: {analiseResultados.RelateLang}.apontamento.\nLinks: {analiseResultados.RelateLink} apontamentos.\nTeclado: {analiseResultados.RelateTeclado} apontamentos.\n\n");
+                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
+                ResultadosTestes.AppendText($"Status de casos de sucessos e dados que não puderam ser testados.\n\nQuantidade de componentes que passaram no teste: {analiseResultados.Sucessos}.\nQuantidade de dados que não estão aplicados para testes: {analiseResultados.NaoAplicados}.\nQuantidade de testes incompletos: {analiseResultados.Incompletos}.\n\nPara ter acesso completo em quais componentes causaram as falhas, exporte o relatório detalhado para conferir os itens que não passaram no teste.");
+            }
+
+
+
 
         }
 
@@ -127,9 +146,19 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
 
         }
 
-        private void ExportarRelatorio(object sender, EventHandler e)
+        private void ExportarRelatorio(object sender, EventArgs e)
         {
-            
+            MessageBox.Show("Iniciando a exportação do relatório para Excel");
+            var exportarRelatorio = _relatorioService.ExportarRelatorioParaExcel(relatorioFinal);
+
+            if(exportarRelatorio)
+            {
+                MessageBox.Show("Relatório exportado com sucesso.");
+            }
+            else
+            {
+                MessageBox.Show("Falha ao exportar relatório.");
+            }
         }
 
 

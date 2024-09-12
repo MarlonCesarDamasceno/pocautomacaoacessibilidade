@@ -30,7 +30,7 @@ namespace PocAutomacaoAcessibilidade
             var m6AcessibilidadeForm = ServiceProvider.GetService<M6Acessibilidade>();
 
 
-            Application.Run(m6AcessibilidadeForm);
+                Application.Run(m6AcessibilidadeForm);
         }
     }
 }

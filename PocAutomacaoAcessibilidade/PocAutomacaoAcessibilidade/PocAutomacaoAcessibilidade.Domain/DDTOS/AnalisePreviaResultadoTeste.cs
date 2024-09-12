@@ -8,6 +8,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS
 {
     public class AnalisePreviaResultadoTeste
     {
+        public string ServicoTestado { get; set; }
         public int Falhas { get; set; }
         public int ImpactoSerio { get; set; }
         public int ImpactoModerado { get; set; }

@@ -9,6 +9,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interface
 {
     public interface IRelatorioService
     {
-        AnalisePreviaResultadoTeste GerarBaseRelatorio(List<ResultadoValidacao> resultadoValidacaos);
+        bool ExportarRelatorioParaExcel(List<ResultadoValidacao> validacoes);
+        List<AnalisePreviaResultadoTeste> GerarBaseRelatorio(List<ResultadoValidacao> resultadoValidacaos);
     }
 }

@@ -15,9 +15,13 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Infra
 {
     public class MotorAcessibilidade: IMotorAcessibilidade
     {
+        //controla quantos testes foram disparados
+        private int quantidadeTestesDisparados;
+
 
         public async Task<List<ResultadoValidacao>>  ValidarAcessibilidade(string Url)
         {
+            
             using (IWebDriver driver = new ChromeDriver())
             {
                 try
@@ -35,9 +39,12 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Infra
                         return null;
                     var saida = JsonSerializer.Serialize(validacaoAcessibilidade);
                     Console.WriteLine("Saida bruta: " + saida);
-                    
 
-                    return MappersResults.MapperToResultadoValidacao(validacaoAcessibilidade);
+                    quantidadeTestesDisparados++;
+
+                    return MappersResults.MapperToResultadoValidacao(validacaoAcessibilidade, Url, quantidadeTestesDisparados);
+                    //zera a quantidade de testes.
+                    quantidadeTestesDisparados = 0;
                 }
                 finally
                 {

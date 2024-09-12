@@ -1,8 +1,8 @@
 ﻿public enum ImpactoEnum
 {
-    Critical,
-    Serious,
-    Moderate,
-    Minor
+    critical,
+    serious,
+    moderate,
+    minor
 
 }

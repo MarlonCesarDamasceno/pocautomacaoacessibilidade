@@ -21,17 +21,44 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             _relatorioService = relatorioService;
         }
 
-        public async Task<AnalisePreviaResultadoTeste> IniciarTeste(string urlServico)
+        public async Task<ResultadosTestes> IniciarTeste(string urlServico, string subDominio)
         {
+            var resultadoTeste = new List<ResultadoValidacao>();
+            var analiseResultadoPreliminarValidacao = new List<AnalisePreviaResultadoTeste>();
+            string[] dominios = subDominio.Split(',');
 
             if (string.IsNullOrEmpty(urlServico))
                 return null;
-            var resultadoTeste = await _motorAcessibilidade.ValidarAcessibilidade(urlServico);
+
+            if(dominios.Length==0 || string.IsNullOrEmpty(subDominio))
+            {
+                
+                resultadoTeste= await _motorAcessibilidade.ValidarAcessibilidade(urlServico);
+
+            }
+            else
+            {
+                resultadoTeste.AddRange(await _motorAcessibilidade.ValidarAcessibilidade(urlServico));
+                foreach (var pathSubDominio in dominios)
+                {
+                    resultadoTeste.AddRange(await _motorAcessibilidade.ValidarAcessibilidade(urlServico + "/" + pathSubDominio));
+                }
+            }
 
             if (resultadoTeste.Count == 0)
                 return null;
 
-            return _relatorioService.GerarBaseRelatorio(resultadoTeste);
+
+            analiseResultadoPreliminarValidacao.AddRange(_relatorioService.GerarBaseRelatorio(resultadoTeste));
+
+            var resultadosValidacoes = new ResultadosTestes()
+            {
+                analisesPreliminaresValidacoes=analiseResultadoPreliminarValidacao,
+                resultadosValidacoes=resultadoTeste
+            };
+
+
+            return resultadosValidacoes;
         }
 
     }
