@@ -107,11 +107,32 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
 
         private async Task IniciarTesteAsync()
         {
+            if (Utils.Utils.ObterServicoTesteRegistrado()==null) 
+            {
+              await  IniciarTeste();
+            }
+
+            if(Utils.Utils.ValidarAlteracaoAlvoTeste(txtUrl.Text))
+            {
+                MessageBox.Show("Atenção, identifiquei que houve mudança no alvo do teste. Os dados anteriores serão sobreescritos.");
+                txtSubDominio.Text = "";
+                relatorioFinal = null;
+
+                await IniciarTeste();
+            }
+
+
+        }
+
+        private async Task IniciarTeste()
+        {
+            Utils.Utils.RegistrarServicoTestado(txtUrl.Text);
             MessageBox.Show($"Atenção, o teste está sendo iniciado para o serviço {txtUrl.Text}");
             var resultadosTestes = await _motorAcessibilidadeService.IniciarTeste(txtUrl.Text, txtSubDominio.Text);
             GerarRelatorioResultadoTeste(resultadosTestes);
-        }
 
+
+        }
         private void GerarRelatorioResultadoTeste(ResultadosTestes resultados)
         {
             ResultadosTestes.Clear();

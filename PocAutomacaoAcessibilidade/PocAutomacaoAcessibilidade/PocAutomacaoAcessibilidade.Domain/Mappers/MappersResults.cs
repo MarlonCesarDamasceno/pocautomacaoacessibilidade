@@ -13,8 +13,9 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Mappers
     public static class MappersResults
     {
 
-        public static List<ResultadoValidacao> MapperToResultadoValidacao(AxeResult axeResult, string urlServico, int controlaTesteDisparado)
+        public static List<ResultadoValidacao> MapperToResultadoValidacao(AxeResult axeResult, string urlServico)
         {
+            Utils.Utils.ControlarServicoTestado();
             var problemasEncontrados = new List<ResultadoValidacao>();
             ResultadoValidacao resultados = null;
 
@@ -24,7 +25,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Mappers
             {
                 resultados = new ResultadoValidacao()
                 {
-                    QuantidadeTestePorDominio = controlaTesteDisparado,
+                    QuantidadeTestePorDominio = Utils.Utils.ObterControleServicoTestado(),
                     ServicoTestado = urlServico,
                     StatusTestes = StatusTesteEnum.Falhas,
                     Descricao = obtemProblemasEncontrados.Description,
@@ -48,7 +49,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Mappers
             {
                 resultados = new ResultadoValidacao()
                 {
-                    QuantidadeTestePorDominio = controlaTesteDisparado,
+                    QuantidadeTestePorDominio = Utils.Utils.ObterControleServicoTestado(),
                     StatusTestes = StatusTesteEnum.Sucessos,
                     Descricao = obtemProblemasEncontrados.Description,
                     DiretrizWCAG = obtemProblemasEncontrados.Tags[1] != "best-practice" ? obtemProblemasEncontrados.Tags[2] : "Não aplicado",
@@ -74,7 +75,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Mappers
 
                 resultados = new ResultadoValidacao()
                 {
-                    QuantidadeTestePorDominio = controlaTesteDisparado,
+                    QuantidadeTestePorDominio = Utils.Utils.ObterControleServicoTestado(),
                     ServicoTestado = urlServico,
                     StatusTestes = StatusTesteEnum.Incompletos,
                     Descricao = obtemProblemasEncontrados.Description,
