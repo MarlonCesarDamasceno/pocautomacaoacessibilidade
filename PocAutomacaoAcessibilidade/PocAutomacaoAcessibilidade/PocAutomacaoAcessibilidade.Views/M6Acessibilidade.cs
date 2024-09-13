@@ -78,6 +78,8 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             ResultadosTestes.WordWrap = true;
             ResultadosTestes.SelectionFont = new Font("arial", 12, FontStyle.Regular);
             ResultadosTestes.SelectionColor = Color.Black;
+            ResultadosTestes.TabIndex = 1;
+
 
 
 
@@ -89,7 +91,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             btnExportarRelatorio.Top = 320;
             btnExportarRelatorio.Left = 10;
             btnExportarRelatorio.Width = 150;
-            btnExportarRelatorio.Click +=new EventHandler(ExportarRelatorio);
+            btnExportarRelatorio.Click += new EventHandler(ExportarRelatorio);
 
 
             this.Controls.Add(lblUrl);
@@ -114,36 +116,75 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
         {
             ResultadosTestes.Clear();
             relatorioFinal = resultados.resultadosValidacoes;
+
             foreach (var analiseResultados in resultados.analisesPreliminaresValidacoes)
             {
 
+                ResultadosTestes.AppendText("M6 Acessibilidade\n\n");
+                ResultadosTestes.SelectionFont = new Font("Arial", 14, FontStyle.Bold);
+                ResultadosTestes.AppendText("Resumo do Teste Realizado\n\n");
 
-                ResultadosTestes.AppendText("M6Acessibilidade\n\n");
-                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Bold);
-                ResultadosTestes.AppendText("Resumo  do teste realizado\n\n");
-                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
+                
+                ResultadosTestes.SelectionFont = new Font("Arial", 14, FontStyle.Regular);
 
-                ResultadosTestes.AppendText($"Data: {System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}\nSite analizado: {analiseResultados.ServicoTestado}\n\n");
-                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
-                ResultadosTestes.AppendText($"Quantidade de componentes que não passaram no teste: {analiseResultados.Falhas}\nQuantidade de impactos críticos: {analiseResultados.ImpactoCritico}\nQuantidade de impactos moderados: {analiseResultados.ImpactoModerado}\nQuantidades de impactos sérios: {analiseResultados.ImpactoSerio}\nQuantidade de impactos baixos: {analiseResultados.ImpactoBaixo}.\n");
-                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
-                ResultadosTestes.AppendText($"Análise de falha por diretrizes da WCAG \n\nContrastes: {analiseResultados.RelateContrast} apontamentos.\n Aria-role: {analiseResultados.RelateAriaRoles} apontamentos.\nImagens: {analiseResultados.RelateImagem} apontamentos.\nEstrutura: {analiseResultados.RelateDocEstrutura} apontamentos.\nFormulários: {analiseResultados.RelateForm}. apontamentos.\nIdioma: {analiseResultados.RelateLang}.apontamento.\nLinks: {analiseResultados.RelateLink} apontamentos.\nTeclado: {analiseResultados.RelateTeclado} apontamentos.\n\n");
-                ResultadosTestes.SelectionFont = new Font("arial", 14, FontStyle.Regular);
-                ResultadosTestes.AppendText($"Status de casos de sucessos e dados que não puderam ser testados.\n\nQuantidade de componentes que passaram no teste: {analiseResultados.Sucessos}.\nQuantidade de dados que não estão aplicados para testes: {analiseResultados.NaoAplicados}.\nQuantidade de testes incompletos: {analiseResultados.Incompletos}.\n\nPara ter acesso completo em quais componentes causaram as falhas, exporte o relatório detalhado para conferir os itens que não passaram no teste.");
+
+                ResultadosTestes.AppendText($"Data: {System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}\n");
+                ResultadosTestes.AppendText($"Site Analisado: {analiseResultados.ServicoTestado}\n\n");
+
+                
+                ResultadosTestes.AppendText($"Quantidade de Componentes que Não Passaram no Teste: {analiseResultados.Falhas}\n");
+                ResultadosTestes.AppendText($"Quantidade de Impactos Críticos: {analiseResultados.ImpactoCritico}\n");
+                ResultadosTestes.AppendText($"Quantidade de Impactos Moderados: {analiseResultados.ImpactoModerado}\n");
+                ResultadosTestes.AppendText($"Quantidade de Impactos Sérios: {analiseResultados.ImpactoSerio}\n");
+                ResultadosTestes.AppendText($"Quantidade de Impactos Baixos: {analiseResultados.ImpactoBaixo}.\n");
+
+
+                ResultadosTestes.AppendText("\nAnálise de Estimativa por Falha de Diretrizes da WCAG\n\n");
+                ResultadosTestes.AppendText($"Contrastes: {analiseResultados.RelateContrast} apontamentos.\n");
+                ResultadosTestes.AppendText($"Aria-role: {analiseResultados.RelateAriaRoles} apontamentos.\n");
+                ResultadosTestes.AppendText($"Imagens: {analiseResultados.RelateImagem} apontamentos.\n");
+                ResultadosTestes.AppendText($"Textos Alternativos: {analiseResultados.RelateAlternative} apontamentos.\n");
+                ResultadosTestes.AppendText($"Semântica: {analiseResultados.RelateSemantics} apontamentos.\n");
+                ResultadosTestes.AppendText($"Sensorial: {analiseResultados.RelateSensory} apontamentos.\n");
+                ResultadosTestes.AppendText($"Estrutura: {analiseResultados.RelateDocEstrutura} apontamentos.\n");
+                ResultadosTestes.AppendText($"Formulários: {analiseResultados.RelateForm} apontamentos.\n");
+                ResultadosTestes.AppendText($"Idioma: {analiseResultados.RelateLang} apontamento.\n");
+                ResultadosTestes.AppendText($"Links: {analiseResultados.RelateLink} apontamentos.\n");
+                ResultadosTestes.AppendText($"Teclado: {analiseResultados.RelateTeclado} apontamentos.\n\n");
+
+                
+                ResultadosTestes.AppendText($"Status de Casos de Sucesso e Dados que Não Pudemos Testar\n\n");
+                ResultadosTestes.AppendText($"Quantidade de Componentes que Passaram no Teste: {analiseResultados.Sucessos}.\n");
+                ResultadosTestes.AppendText($"Quantidade de Dados que Não Estão Aplicados para Testes: {analiseResultados.NaoAplicados}.\n");
+                ResultadosTestes.AppendText($"Quantidade de Testes que Não Pudemos Analisar Automaticamente e Que Apresentam Potencial de Falhas e Precisam Ser Analisados Manualmente: {analiseResultados.Incompletos}.\n\n");
             }
 
-
-
-
+            
+            ResultadosTestes.SelectionFont = new Font("Arial", 14, FontStyle.Regular);
+            ResultadosTestes.AppendText("Esses resultados são apenas dados preliminares do teste realizado. Gere o relatório completo para uma análise mais profunda dos problemas encontrados.\nMCD Acessibilidade. Desenvolvido por Marlon Cesar Damasceno.");
         }
+
+
+
+
+
 
         private void ExibirMensagemPadrao()
         {
+            
+            ResultadosTestes.AppendText("M6 Acessibilidade\n\n");
 
-            ResultadosTestes.AppendText("M6Acessibilidade\n\n");
-            ResultadosTestes.AppendText(" Ao iniciar o teste, seu navegador será aberto e o software irá coletar as validações de acessibilidades e exibir um status geral dos problemas encontrados. Você poderá exportar uma planilha que irá conter todos os problemas encontrados bem como os componentes que causaram a falha. \nInsira a url no formato: https ou http://site.com.br e ir em iniciar teste. Aguarde até que os resultados sejam exibidos.");
 
+            ResultadosTestes.AppendText(
+                "Ao iniciar o teste, seu navegador será aberto e o software irá coletar as validações de acessibilidade, " +
+                "exibindo um status geral dos problemas encontrados. Você poderá exportar uma planilha que conterá todos os " +
+                "problemas encontrados, bem como os componentes que causaram a falha.\n\n" +
+                "Insira a URL no formato: https:// ou http://site.com.br e clique em 'Iniciar Teste'. Aguarde até que os resultados " +
+                "sejam exibidos.\n\n"
+            );
 
+            
+            ResultadosTestes.AppendText("MCD Acessibilidade. Desenvolvido por Marlon Cesar Damasceno.");
         }
 
         private void ExportarRelatorio(object sender, EventArgs e)
@@ -151,7 +192,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             MessageBox.Show("Iniciando a exportação do relatório para Excel");
             var exportarRelatorio = _relatorioService.ExportarRelatorioParaExcel(relatorioFinal);
 
-            if(exportarRelatorio)
+            if (exportarRelatorio)
             {
                 MessageBox.Show("Relatório exportado com sucesso.");
             }

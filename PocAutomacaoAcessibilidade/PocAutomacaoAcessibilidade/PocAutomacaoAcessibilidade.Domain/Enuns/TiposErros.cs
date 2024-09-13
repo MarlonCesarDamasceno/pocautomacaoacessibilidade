@@ -17,5 +17,9 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Enuns
         public const string CatImages = "cat.images";
         public const string CatLanguage = "cat.language";
         public const string CatRoles = "cat.roles";
+        public const string CatSensory = "cat.sensory-and-visual-cues";
+        public const string CatSemantic = "cat.semantics";
+        public const string CatAlternative = "cat.text-alternatives";
+
     }
 }

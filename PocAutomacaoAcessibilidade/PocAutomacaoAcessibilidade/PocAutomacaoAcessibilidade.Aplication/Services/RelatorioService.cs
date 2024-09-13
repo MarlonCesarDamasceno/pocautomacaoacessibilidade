@@ -35,90 +35,59 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             for (int selecioneTestePorDominio = 1; selecioneTestePorDominio <= maxQuantidadeTestePorDominio; selecioneTestePorDominio++)
             {
                 var baseRelatorio = new AnalisePreviaResultadoTeste();
+
                 var obtemRelatorioPorDominio = resultadoValidacaos.Where(x => x.QuantidadeTestePorDominio == selecioneTestePorDominio).ToList();
-                foreach (var relatorio in obtemRelatorioPorDominio)
-                {
-                    baseRelatorio.ServicoTestado = relatorio.ServicoTestado;
 
-                    switch (relatorio.StatusTestes)
-                    {
-                        case StatusTesteEnum.Falhas:
-                            baseRelatorio.Falhas++;
-                            break;
+                var obterFalhas = obtemRelatorioPorDominio.Where(x => x.StatusTestes == StatusTesteEnum.Falhas).ToList();
 
-                        case StatusTesteEnum.Sucessos:
-                            baseRelatorio.Sucessos++;
-                            break;
+                baseRelatorio.Falhas = obterFalhas.Sum(x => x.Mensagem.Count);
 
-                        case StatusTesteEnum.NaoAplicados:
-                            baseRelatorio.NaoAplicados++;
-                            break;
-
-                        case StatusTesteEnum.Incompletos:
-                            baseRelatorio.Incompletos++;
-                            break;
-                    }
+                baseRelatorio.ImpactoSerio = obterFalhas.SelectMany(x => x.ImpactoErroComponente).Count(impacto => impacto == ImpactoEnum.serious.ToString());
 
 
 
-                    switch (relatorio.Impacto)
-                    {
-                        case var impacto when impacto == ImpactoEnum.serious.ToString() && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.ImpactoSerio++;
-                            break;
-                        case var impacto when impacto == ImpactoEnum.critical.ToString() && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.ImpactoCritico++;
-                            break;
-                        case var impacto when impacto == ImpactoEnum.moderate.ToString() && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.ImpactoModerado++;
-                            break;
-                    }
+                baseRelatorio.ImpactoBaixo = obterFalhas.SelectMany(x => x.ImpactoErroComponente).Count(impacto => impacto == ImpactoEnum.minor.ToString());
 
-                    switch (relatorio.TipoProblema)
-                    {
-                        case var tipoErros when tipoErros == TiposErros.CatAria && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateAriaRoles++;
-                            break;
+                baseRelatorio.ImpactoCritico = obterFalhas.SelectMany(x => x.ImpactoErroComponente).Count(impacto => impacto == ImpactoEnum.critical.ToString());
 
-                        case var tiposErros when tiposErros == TiposErros.CatColor && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateContrast++;
-                            break;
+                baseRelatorio.ImpactoModerado = obterFalhas.SelectMany(x => x.ImpactoErroComponente).Count(impacto => impacto == ImpactoEnum.moderate.ToString());
 
+                baseRelatorio.RelateAriaRoles = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatRoles);
 
-                        case var tiposErros when tiposErros == TiposErros.CatForms && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateForm++;
-                            break;
+                baseRelatorio.RelateContrast = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatColor);
 
-                        case var tiposErros when tiposErros == TiposErros.CatImages && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateImagem++;
-                            break;
+                baseRelatorio.RelateDocEstrutura = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatStructure);
 
+                baseRelatorio.RelateForm = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatForms);
 
-                        case var tiposErros when tiposErros == TiposErros.CatKeyboard && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateTeclado++;
-                            break;
+                baseRelatorio.RelateImagem = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatImages);
 
+                baseRelatorio.RelateLang = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatLanguage);
 
-                        case var tiposErros when tiposErros == TiposErros.CatLanguage && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateLang++;
-                            break;
+                baseRelatorio.RelateLink = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatLinks);
 
+                baseRelatorio.RelateTeclado = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatKeyboard);
 
-                        case var tiposErros when tiposErros == TiposErros.CatLinks && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateLink++;
-                            break;
+                baseRelatorio.RelateSemantics= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSemantic);
 
+                baseRelatorio.RelateSensory= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSensory);
 
-                        case var tiposErros when tiposErros == TiposErros.CatStructure && relatorio.StatusTestes == StatusTesteEnum.Falhas:
-                            baseRelatorio.RelateDocEstrutura++;
-                            break;
-                    }
+                baseRelatorio.RelateAlternative= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatAria);
 
-                }
+                baseRelatorio.ServicoTestado = obterFalhas.FirstOrDefault().ServicoTestado;
+
+                var obterSucessos = obtemRelatorioPorDominio.Where(x => x.StatusTestes == StatusTesteEnum.Sucessos).ToList();
+
+                baseRelatorio.Sucessos = obterSucessos.Sum(x => x.Mensagem.Count);
+
+                var obterIncompletos = obtemRelatorioPorDominio.Where(x => x.StatusTestes == StatusTesteEnum.Incompletos).ToList();
+
+                baseRelatorio.Incompletos = obterIncompletos.Sum(x => x.Mensagem.Count);
+
                 relatorioBasico.Add(baseRelatorio);
-                
-
             }
+
+
             return relatorioBasico;
         }
 
@@ -142,7 +111,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                     var filtroPaginaRelatorio = validacoes.Where(x => x.QuantidadeTestePorDominio == i).ToList();
                     string nomeAbaRelatorio = filtroPaginaRelatorio.Select(x => x.ServicoTestado).FirstOrDefault();
                     _logger.LogInformation($"Serviço testado: {filtroPaginaRelatorio.FirstOrDefault().ServicoTestado}. Página atual: {filtroPaginaRelatorio.FirstOrDefault().QuantidadeTestePorDominio}");
-                
+
                     try
                     {
                         _logger.LogInformation($"Criando nova aba de resultados: Serviço testado: {filtroPaginaRelatorio.FirstOrDefault().ServicoTestado}. Página atual: {filtroPaginaRelatorio.FirstOrDefault().QuantidadeTestePorDominio} nova aba: {nomeAbaRelatorio}");
@@ -163,9 +132,9 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                                 linha++;
                                 ct++;
                             }
-                            else if(itensResultados.HTML.Count==itensResultados.Seletor.Count &&itensResultados.HTML.Count !=itensResultados.IDErroComponente.Count)
+                            else if (itensResultados.HTML.Count == itensResultados.Seletor.Count && itensResultados.HTML.Count != itensResultados.IDErroComponente.Count)
                             {
-                                    _logger.LogInformation($"{itensResultados.HTML.Count}. Preencher excel com valores de html e seletor fixo pois há apenas um item dentro do array retornado.");
+                                _logger.LogInformation($"{itensResultados.HTML.Count}. Preencher excel com valores de html e seletor fixo pois há apenas um item dentro do array retornado.");
                                 for (int obterResultadosPorComponentes = 0; obterResultadosPorComponentes <= itensResultados.IDErroComponente.Count - 1; obterResultadosPorComponentes++)
                                 {
                                     _logger.LogInformation($"Iniciado preencher dados por valores de componentes. Quantidades: idComponentes: {itensResultados.IDErroComponente.Count}, impacto: {itensResultados.ImpactoErroComponente.Count}, mensagem: {itensResultados.Mensagem.Count}, html: {itensResultados.HTML.Count}, seletor: {itensResultados.Seletor.Count}, idErro: {itensResultados.IDErroComponente.Count}. iteração atual: {obterResultadosPorComponentes}");
@@ -336,10 +305,10 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
         {
             var dataAtual = System.DateTime.Now.ToString("yyyy-MM-HH-mm");
 
-            var nomeArquivo = "RelatorioAcessibilidade_" + Utils.Utils.ExtrairNomeDominiio(url) + "_" +dataAtual+ ".xlsx";
+            var nomeArquivo = "RelatorioAcessibilidade_" + Utils.Utils.ExtrairNomeDominiio(url) + "_" + dataAtual + ".xlsx";
 
             FileInfo file = new FileInfo(@"C:\Users\Dell\Documents\" + nomeArquivo);
-                package.SaveAs(file);
+            package.SaveAs(file);
             _logger.LogInformation("Planilha salva");
 
         }

@@ -25,6 +25,10 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS
         public int RelateTeclado { get; set; }
         public int RelateImagem { get; set; }
         public int RelateLang { get; set; }
+        public int RelateSensory { get; set; }
+        public int RelateAlternative { get; set; }
+        public int RelateSemantics { get; set; }
+
 
 
 
