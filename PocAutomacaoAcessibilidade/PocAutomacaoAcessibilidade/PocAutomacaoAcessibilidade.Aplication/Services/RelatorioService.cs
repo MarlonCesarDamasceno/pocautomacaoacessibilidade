@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS.Relatorios;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Enuns;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -202,19 +204,48 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
         private ExcelWorksheet CriarAbaRelatorio(ExcelWorksheet plan, string nomeServicoTestado)
         {
             plan.Cells["a1"].Value = "MCD Acessibilidade relatório completo";
-            plan.Cells["a2"].Value = "Serviço analisado";
-            plan.Cells["a3"].Value = "Data";
-            plan.Cells["g2"].Value = nomeServicoTestado;
-            plan.Cells["g3"].Value = System.DateTime.Now.ToString("dd/MM/AAAA");
             plan.Cells["a1:l1"].Merge = true;
-            plan.Cells["a1"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            plan.Cells["a1"].Style.Font.Bold = true;
+            plan.Cells["a1"].Style.Font.Size = 16;
+            plan.Cells["a1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            plan.Cells["a1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["a1"].Style.Fill.BackgroundColor.SetColor(Color.LightBlue); // Fundo azul claro
+            plan.Cells["a1"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
+
+            // Serviço analisado
+            plan.Cells["a2"].Value = "Serviço analisado";
             plan.Cells["a2:f2"].Merge = true;
+            plan.Cells["a2"].Style.Font.Bold = true;
+            plan.Cells["a2"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["a2"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["a2"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
             plan.Cells["a2"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+            // Nome do serviço analisado
+            plan.Cells["g2"].Value = nomeServicoTestado;
             plan.Cells["g2:l2"].Merge = true;
+            plan.Cells["g2"].Style.Font.Bold = true;
+            plan.Cells["g2"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["g2"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["g2"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
             plan.Cells["g2"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+            // Data do relatório
+            plan.Cells["a3"].Value = "Data";
             plan.Cells["a3:f3"].Merge = true;
+            plan.Cells["a3"].Style.Font.Bold = true;
+            plan.Cells["a3"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["a3"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["a3"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
             plan.Cells["a3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+            // Data atual formatada
+            plan.Cells["g3"].Value = System.DateTime.Now.ToString("dd/MM/yyyy");
             plan.Cells["g3:l3"].Merge = true;
+            plan.Cells["g3"].Style.Font.Bold = true;
+            plan.Cells["g3"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["g3"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["g3"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
             plan.Cells["g3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
 
             return plan;
@@ -222,7 +253,6 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
         private ExcelWorksheet CriarHeaderColunas(ExcelWorksheet plan)
         {
-
             plan.Cells["a4"].Value = "CT";
             plan.Cells["b4"].Value = "ID";
             plan.Cells["c4"].Value = "Descrição geral";
@@ -235,6 +265,28 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells["j4"].Value = "Pilar WCAG";
             plan.Cells["k4"].Value = "Categoria";
             plan.Cells["l4"].Value = "Data hora teste";
+
+            // Aplicando a formatação
+            using (var range = plan.Cells["a4:l4"])
+            {
+                range.Style.Font.Bold = true; // Negrito
+                range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center; // Alinhamento central
+                range.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center; // Alinhamento vertical central
+                range.Style.Fill.PatternType = ExcelFillStyle.Solid; // Tipo de preenchimento sólido
+                range.Style.Fill.BackgroundColor.SetColor(Color.LightBlue); // Cor de fundo azul claro
+                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Top.Color.SetColor(Color.Black); // Cor da borda superior
+                range.Style.Border.Bottom.Color.SetColor(Color.Black); // Cor da borda inferior
+                range.Style.Border.Left.Color.SetColor(Color.Black); // Cor da borda esquerda
+                range.Style.Border.Right.Color.SetColor(Color.Black); // Cor da borda direita
+            }
+
+            // Ajuste automático de largura das colunas
+            plan.Cells["a4:l4"].AutoFitColumns();
+
 
             return plan;
         }
@@ -253,14 +305,36 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells[$"i{linha}"].Value = diretrizWcag;
             plan.Cells[$"j{linha}"].Value = pilarWcag;
             plan.Cells[$"k{linha}"].Value = categoria;
-            plan.Cells[$"l{linha}"].Value = System.DateTime.Now.ToString("dd/MM/AAAA HH:MM:ss");
+            plan.Cells[$"l{linha}"].Value = System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); // Corrigido o formato da hora
+
+            // Aplicando a formatação para as células de resultados
+            using (var range = plan.Cells[$"a{linha}:l{linha}"])
+            {
+                range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center; // Alinhamento central
+                range.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center; // Alinhamento vertical central
+                range.Style.Font.Name = "Arial"; // Fonte Arial
+                range.Style.Font.Size = 11; // Tamanho da fonte
+                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Top.Color.SetColor(Color.Black); // Cor da borda superior
+                range.Style.Border.Bottom.Color.SetColor(Color.Black); // Cor da borda inferior
+                range.Style.Border.Left.Color.SetColor(Color.Black); // Cor da borda esquerda
+                range.Style.Border.Right.Color.SetColor(Color.Black); // Cor da borda direita
+                range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                range.Style.Fill.BackgroundColor.SetColor(Color.White); // Fundo branco para as células de resultados
+            }
+
+            // Ajustar a largura das colunas para os dados
+            plan.Cells[$"a{linha}:l{linha}"].AutoFitColumns();
 
             return plan;
         }
 
         private void SalvarPlanilha(ExcelPackage package, string url)
         {
-            var dataAtual = System.DateTime.Now.ToString("dd-MM-aaaa-HH-mm");
+            var dataAtual = System.DateTime.Now.ToString("yyyy-MM-HH-mm");
 
             var nomeArquivo = "RelatorioAcessibilidade_" + Utils.Utils.ExtrairNomeDominiio(url) + "_" +dataAtual+ ".xlsx";
 
