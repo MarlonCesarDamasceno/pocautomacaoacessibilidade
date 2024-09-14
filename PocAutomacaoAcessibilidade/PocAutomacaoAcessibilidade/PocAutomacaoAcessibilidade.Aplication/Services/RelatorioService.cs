@@ -4,6 +4,7 @@ using OfficeOpenXml.Style;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.DDTOS.Relatorios;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Enuns;
+using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interfaces;
 using PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
     public class RelatorioService : IRelatorioService
     {
         private readonly ILogger<RelatorioService> _logger;
+        private readonly IMotorAcessibilidade _motorAcessibilidade;
 
-        public RelatorioService(ILogger<RelatorioService> logger)
+        public RelatorioService(ILogger<RelatorioService> logger, IMotorAcessibilidade motorAcessibilidade)
         {
             _logger = logger;
+            _motorAcessibilidade = motorAcessibilidade;
+
         }
 
         public List<AnalisePreviaResultadoTeste> GerarBaseRelatorio(List<ResultadoValidacao> resultadoValidacaos)
@@ -68,11 +72,11 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
                 baseRelatorio.RelateTeclado = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatKeyboard);
 
-                baseRelatorio.RelateSemantics= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSemantic);
+                baseRelatorio.RelateSemantics = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSemantic);
 
-                baseRelatorio.RelateSensory= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSensory);
+                baseRelatorio.RelateSensory = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatSensory);
 
-                baseRelatorio.RelateAlternative= obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatAria);
+                baseRelatorio.RelateAlternative = obterFalhas.Select(x => x.TipoProblema).Count(y => y == TiposErros.CatAria);
 
                 baseRelatorio.ServicoTestado = obterFalhas.FirstOrDefault().ServicoTestado;
 
@@ -120,7 +124,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
                         CriarHeaderColunas(plan);
                         _logger.LogInformation("Definindo contador de linhas e casos de testes para posição inicial. 4 e 1.");
                         ct = 1;
-                        linha = 5;
+                        linha = 6;
 
                         foreach (var itensResultados in filtroPaginaRelatorio)
                         {
@@ -217,26 +221,48 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells["g3"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
             plan.Cells["g3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
 
+            plan.Cells["a4"].Value = "Analista";
+            plan.Cells["a4:f4"].Merge = true;
+            plan.Cells["a4"].Style.Font.Bold = true;
+            plan.Cells["a4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["a4"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["a4"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
+            plan.Cells["a4"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+
+            plan.Cells["g4"].Value = Utils.Utils.ObterNomeUsuario();
+            plan.Cells["g4:l4"].Merge = true;
+            plan.Cells["g4"].Style.Font.Bold = true;
+            plan.Cells["g4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            plan.Cells["g4"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
+            plan.Cells["g4"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
+            plan.Cells["g4"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+
             return plan;
+
+
         }
 
         private ExcelWorksheet CriarHeaderColunas(ExcelWorksheet plan)
         {
-            plan.Cells["a4"].Value = "CT";
-            plan.Cells["b4"].Value = "ID";
-            plan.Cells["c4"].Value = "Descrição geral";
-            plan.Cells["d4"].Value = "Componente";
-            plan.Cells["e4"].Value = "Seletor Componente";
-            plan.Cells["f4"].Value = "Descrição";
-            plan.Cells["g4"].Value = "Impacto";
-            plan.Cells["h4"].Value = "Status do teste";
-            plan.Cells["i4"].Value = "Diretriz WCAG";
-            plan.Cells["j4"].Value = "Pilar WCAG";
-            plan.Cells["k4"].Value = "Categoria";
-            plan.Cells["l4"].Value = "Data hora teste";
+            plan.Cells["a5"].Value = "CT";
+            plan.Cells["b5"].Value = "ID";
+            plan.Cells["c5"].Value = "Descrição geral";
+            plan.Cells["d5"].Value = "Componente";
+            plan.Cells["e5"].Value = "Seletor Componente";
+            plan.Cells["f5"].Value = "Descrição";
+            plan.Cells["g5"].Value = "Descrição do do problema baseado em IA";
+            plan.Cells["h5"].Value = "Aplicabilidade de correção";
+            plan.Cells["i5"].Value = "Impacto";
+            plan.Cells["j5"].Value = "Status do teste";
+            plan.Cells["k5"].Value = "Diretriz WCAG";
+            plan.Cells["l5"].Value = "Pilar WCAG";
+            plan.Cells["m5"].Value = "Categoria";
+            plan.Cells["n5"].Value = "Data hora teste";
 
             // Aplicando a formatação
-            using (var range = plan.Cells["a4:l4"])
+            using (var range = plan.Cells["a5:n5"])
             {
                 range.Style.Font.Bold = true; // Negrito
                 range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center; // Alinhamento central
@@ -254,7 +280,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             }
 
             // Ajuste automático de largura das colunas
-            plan.Cells["a4:l4"].AutoFitColumns();
+            plan.Cells["a5:n5"].AutoFitColumns();
 
 
             return plan;
@@ -269,15 +295,18 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells[$"d{linha}"].Value = componente;
             plan.Cells[$"e{linha}"].Value = seletorComponente;
             plan.Cells[$"f{linha}"].Value = descricao;
-            plan.Cells[$"g{linha}"].Value = impacto;
-            plan.Cells[$"h{linha}"].Value = statusTeste;
-            plan.Cells[$"i{linha}"].Value = diretrizWcag;
-            plan.Cells[$"j{linha}"].Value = pilarWcag;
-            plan.Cells[$"k{linha}"].Value = categoria;
-            plan.Cells[$"l{linha}"].Value = System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); // Corrigido o formato da hora
+            plan.Cells[$"g{linha}"].Value = _motorAcessibilidade.ObterDescricaoErro(Id);
+            plan.Cells[$"h{linha}"].Value = _motorAcessibilidade.ObterAplicabilidadeDeCodigo(Id);
+            plan.Cells[$"i{linha}"].Value = impacto;
+            plan.Cells[$"j{linha}"].Value = statusTeste;
+            plan.Cells[$"k{linha}"].Value = diretrizWcag;
+            plan.Cells[$"l{linha}"].Value = pilarWcag;
+            plan.Cells[$"m{linha}"].Value = categoria;
+            plan.Cells[$"n{linha}"].Value = System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); // Corrigido o formato da hora
+
 
             // Aplicando a formatação para as células de resultados
-            using (var range = plan.Cells[$"a{linha}:l{linha}"])
+            using (var range = plan.Cells[$"a{linha}:n{linha}"])
             {
                 range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center; // Alinhamento central
                 range.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center; // Alinhamento vertical central
@@ -306,10 +335,11 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             var dataAtual = System.DateTime.Now.ToString("yyyy-MM-HH-mm");
 
             var nomeArquivo = "RelatorioAcessibilidade_" + Utils.Utils.ExtrairNomeDominiio(url) + "_" + dataAtual + ".xlsx";
+            var diretorio = Utils.Utils.DefinirDiretorioRelatorio() + "\\" + nomeArquivo;
 
-            FileInfo file = new FileInfo(@"C:\Users\Dell\Documents\" + nomeArquivo);
+            FileInfo file = new FileInfo(diretorio);
             package.SaveAs(file);
-            _logger.LogInformation("Planilha salva");
+            _logger.LogInformation($"Planilha salva em: {diretorio}");
 
         }
 

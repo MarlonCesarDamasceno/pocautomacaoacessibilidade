@@ -9,6 +9,8 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Domain.Interface
 {
     public interface IMotorAcessibilidade
     {
+        string ObterAplicabilidadeDeCodigo(string id);
+        string ObterDescricaoErro(string id);
         Task<List<ResultadoValidacao>> ValidarAcessibilidade(string Url);
     }
 }

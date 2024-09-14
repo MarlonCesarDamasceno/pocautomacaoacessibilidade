@@ -54,3 +54,4 @@ C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibi
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Options.dll
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Dell\Documents\Projetos\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\PocAutomacaoAcessibilidade\bin\Debug\net5.0-windows\PocAutomacaoAcessibilidade.Domain\DDTOS\Data\BaseIA.json

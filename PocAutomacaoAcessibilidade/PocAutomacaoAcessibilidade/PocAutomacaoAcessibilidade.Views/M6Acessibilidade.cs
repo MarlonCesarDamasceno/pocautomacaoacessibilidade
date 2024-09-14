@@ -37,63 +37,72 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
 
         private void IniciarTela()
         {
+            // Configurações da tela
             this.Text = "M6Acessibilidade Automação";
             this.Width = 900;
             this.Height = 500;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-
+            // Label para URL
             lblUrl = new Label();
             lblUrl.Text = "Url do serviço que será testado:";
             lblUrl.Top = 20;
             lblUrl.Left = 10;
-            lblUrl.Width = 200;
+            lblUrl.Width = 300;
 
-
+            // TextBox para URL
             txtUrl = new TextBox();
             txtUrl.Top = 50;
             txtUrl.Left = 10;
             txtUrl.Width = 400;
             txtUrl.Text = "https://";
 
+            // Label para Subdomínios
             lblsubDominios = new Label();
-            lblsubDominios.Text = "Se houver subdominios, digite separados por vírgulas. exemplo produto,cadastrar-novoproduto,entrar";
+            lblsubDominios.Text = "Subdomínios (separados por vírgulas):";
+            lblsubDominios.Top = 90;
+            lblsubDominios.Left = 10;
+            lblsubDominios.Width = 400;
 
+            // TextBox para Subdomínios
             txtSubDominio = new TextBox();
+            txtSubDominio.Top = 120;
+            txtSubDominio.Left = 10;
+            txtSubDominio.Width = 400;
+
+            // Botão para iniciar o teste
             btnIniciarTeste = new Button();
             btnIniciarTeste.Text = "Iniciar Teste";
-            btnIniciarTeste.Top = 90;
+            btnIniciarTeste.Top = 160;
             btnIniciarTeste.Left = 10;
-            btnIniciarTeste.Width = 100;
+            btnIniciarTeste.Width = 150;
             btnIniciarTeste.Click += async (sender, e) => await IniciarTesteAsync();
 
-            // RichTextBox para exibir resultados dos testes
+            // RichTextBox para exibir os resultados dos testes
             ResultadosTestes = new RichTextBox();
-            ResultadosTestes.Top = 130;
+            ResultadosTestes.Top = 200;
             ResultadosTestes.Left = 10;
             ResultadosTestes.Width = 550;
             ResultadosTestes.Height = 200;
             ResultadosTestes.ReadOnly = true;
             ResultadosTestes.IsAccessible = true;
             ResultadosTestes.WordWrap = true;
-            ResultadosTestes.SelectionFont = new Font("arial", 12, FontStyle.Regular);
+            ResultadosTestes.SelectionFont = new Font("Arial", 12, FontStyle.Regular);
             ResultadosTestes.SelectionColor = Color.Black;
-            ResultadosTestes.TabIndex = 1;
 
 
-
-
+            // Exibir mensagem padrão na caixa de resultados
             ExibirMensagemPadrao();
 
-            // Botão para exportar o relatório
+            // Botão para exportar relatório
             btnExportarRelatorio = new Button();
             btnExportarRelatorio.Text = "Exportar Relatório";
-            btnExportarRelatorio.Top = 320;
+            btnExportarRelatorio.Top = 420;
             btnExportarRelatorio.Left = 10;
             btnExportarRelatorio.Width = 150;
             btnExportarRelatorio.Click += new EventHandler(ExportarRelatorio);
 
-
+            // Adicionando controles à tela
             this.Controls.Add(lblUrl);
             this.Controls.Add(txtUrl);
             this.Controls.Add(lblsubDominios);
@@ -101,7 +110,6 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Views
             this.Controls.Add(btnIniciarTeste);
             this.Controls.Add(ResultadosTestes);
             this.Controls.Add(btnExportarRelatorio);
-
 
         }
 

@@ -1,0 +1,663 @@
+[
+{
+    "ID": "aria-allowed-attr",
+    "DescricaoGeradaPorIA": "Verifique se o papel do elemento suporta os atributos ARIA que estão sendo usados.",
+    "ExemploDeCodigoHtml": "<div role=\"button\" aria-pressed=\"true\">Click me</div>"
+},
+
+{
+    "ID": "aria-braille-equivalent",
+    "DescricaoGeradaPorIA": "Certifique-se de que os atributos 'aria-braillelabel' e 'aria-brailleroledescription' tenham uma equivalente não-braille apropriada.",
+    "ExemploDeCodigoHtml": "<div role=\"banner\" aria-braillelabel=\"Logo\" aria-label=\"Company Logo\">Company Logo</div>"
+},
+{
+    "ID": "aria-command-name",
+    "DescricaoGeradaPorIA": "Assegure-se de que todos os botões, links e itens de menu com ARIA tenham um nome acessível apropriado.",
+    "ExemploDeCodigoHtml": "<button aria-label=\"Close\">X</button>"
+},
+{
+    "ID": "aria-conditional-attr",
+    "DescricaoGeradaPorIA": "Verifique se os atributos ARIA são usados de acordo com a especificação do papel do elemento.",
+    "ExemploDeCodigoHtml": "<div role=\"dialog\" aria-hidden=\"false\">Dialog content</div>"
+},
+{
+    "ID": "aria-deprecated-role",
+    "DescricaoGeradaPorIA": "Certifique-se de que os elementos não utilizem papéis ARIA obsoletos.",
+    "ExemploDeCodigoHtml": "<div role=\"presentation\">Content</div>"
+},
+{
+    "ID": "aria-hidden-body",
+    "DescricaoGeradaPorIA": "Assegure que o atributo 'aria-hidden=\"true\"' não esteja aplicado ao corpo do documento.",
+    "ExemploDeCodigoHtml": "<body aria-hidden=\"true\">Content</body>"
+},
+{
+    "ID": "aria-hidden-focus",
+    "DescricaoGeradaPorIA": "Verifique se os elementos com 'aria-hidden=\"true\"' não são focáveis nem contêm elementos focáveis.",
+    "ExemploDeCodigoHtml": "<div aria-hidden=\"true\"><button>Focusable</button></div>"
+},
+{
+    "ID": "aria-input-field-name",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada campo de entrada com ARIA tenha um nome acessível.",
+    "ExemploDeCodigoHtml": "<input type=\"text\" aria-label=\"Username\">"
+},
+{
+    "ID": "aria-meter-name",
+    "DescricaoGeradaPorIA": "Verifique se cada elemento de medidor ARIA tem um nome acessível apropriado.",
+    "ExemploDeCodigoHtml": "<meter aria-label=\"Progress\" value=\"0.6\">60%</meter>"
+},
+{
+    "ID": "aria-progressbar-name",
+    "DescricaoGeradaPorIA": "Assegure-se de que cada barra de progresso ARIA tenha um nome acessível apropriado.",
+    "ExemploDeCodigoHtml": "<div role=\"progressbar\" aria-label=\"Loading\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\">50%</div>"
+},
+{
+    "ID": "aria-prohibited-attr",
+    "DescricaoGeradaPorIA": "Certifique-se de que os atributos ARIA não utilizados não sejam aplicados ao elemento.",
+    "ExemploDeCodigoHtml": "<div role=\"list\" aria-checked=\"true\">List item</div>"
+},
+{
+    "ID": "aria-required-attr",
+    "DescricaoGeradaPorIA": "Verifique se todos os elementos com papéis ARIA possuem todos os atributos ARIA obrigatórios.",
+    "ExemploDeCodigoHtml": "<div role=\"tab\" aria-selected=\"true\">Tab 1</div>"
+},
+{
+    "ID": "aria-required-children",
+    "DescricaoGeradaPorIA": "Certifique-se de que os elementos com papéis ARIA que exigem papéis filhos contêm esses filhos.",
+    "ExemploDeCodigoHtml": "<div role=\"tree\" aria-expanded=\"true\"><div role=\"treeitem\">Item 1</div></div>"
+},
+{
+    "ID": "aria-required-parent",
+    "DescricaoGeradaPorIA": "Assegure que elementos com papéis ARIA que exigem papéis de pai estejam corretamente aninhados.",
+    "ExemploDeCodigoHtml": "<div role=\"tree\"><div role=\"treeitem\">Item 1</div></div>"
+},
+{
+    "ID": "aria-roles",
+    "DescricaoGeradaPorIA": "Verifique se todos os elementos com o atributo 'role' usam valores válidos e apropriados.",
+    "ExemploDeCodigoHtml": "<div role=\"navigation\">Navigation</div>"
+},
+{
+    "ID": "aria-toggle-field-name",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada campo de alternância ARIA tenha um nome acessível.",
+    "ExemploDeCodigoHtml": "<button aria-pressed=\"false\" aria-label=\"Toggle\">Toggle</button>"
+},
+{
+    "ID": "aria-tooltip-name",
+    "DescricaoGeradaPorIA": "Verifique se cada tooltip ARIA possui um nome acessível.",
+    "ExemploDeCodigoHtml": "<div role=\"tooltip\" aria-label=\"Tooltip content\">Hover me</div>"
+},
+{
+    "ID": "aria-valid-attr-value",
+    "DescricaoGeradaPorIA": "Assegure que todos os atributos ARIA têm valores válidos de acordo com a especificação.",
+    "ExemploDeCodigoHtml": "<button aria-pressed=\"true\">Button</button>"
+},
+{
+    "ID": "aria-valid-attr",
+    "DescricaoGeradaPorIA": "Verifique se os atributos que começam com 'aria-' são atributos ARIA válidos.",
+    "ExemploDeCodigoHtml": "<div aria-label=\"Label\">Content</div>"
+},
+{
+    "ID": "blink",
+    "DescricaoGeradaPorIA": "Certifique-se de que o elemento <blink> não seja utilizado, pois não é suportado pelos padrões modernos.",
+    "ExemploDeCodigoHtml": "<blink>Don't blink</blink>"
+},
+{
+    "ID": "button-name",
+    "DescricaoGeradaPorIA": "Verifique se todos os botões têm um texto discernível e informativo.",
+    "ExemploDeCodigoHtml": "<button>Submit</button>"
+},
+{
+    "ID": "bypass",
+    "DescricaoGeradaPorIA": "Assegure que a página contenha um mecanismo para pular a navegação e acessar diretamente o conteúdo principal.",
+    "ExemploDeCodigoHtml": "<a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>"
+},
+{
+    "ID": "color-contrast",
+    "DescricaoGeradaPorIA": "Certifique-se de que o contraste entre cores de texto e fundo atenda aos requisitos de contraste do WCAG 2 AA.",
+    "ExemploDeCodigoHtml": "<p style=\"color: #000; background-color: #fff;\">Text</p>"
+},
+{
+    "ID": "definition-list",
+    "DescricaoGeradaPorIA": "Verifique se as listas de definições (<dl>) estão corretamente estruturadas.",
+    "ExemploDeCodigoHtml": "<dl><dt>Term</dt><dd>Definition</dd></dl>"
+},
+{
+    "ID": "dlitem",
+    "DescricaoGeradaPorIA": "Certifique-se de que os elementos <dt> e <dd> estão contidos por um elemento <dl> apropriado.",
+    "ExemploDeCodigoHtml": "<dl><dt>Term</dt><dd>Definition</dd></dl>"
+},
+{
+    "ID": "document-title",
+    "DescricaoGeradaPorIA": "Assegure-se de que cada documento HTML contenha um elemento <title> não vazio e descritivo.",
+    "ExemploDeCodigoHtml": "<title>Page Title</title>"
+},
+{
+    "ID": "duplicate-id-aria",
+    "DescricaoGeradaPorIA": "Certifique-se de que os valores dos atributos 'id' usados em ARIA e em labels sejam únicos em toda a página.",
+    "ExemploDeCodigoHtml": "<div id=\"unique-id\" aria-labelledby=\"unique-id\">Content</div>"
+},
+{
+    "ID": "form-field-multiple-labels",
+    "DescricaoGeradaPorIA": "Verifique se um campo de formulário não possui múltiplos elementos de label.",
+    "ExemploDeCodigoHtml": "<input type=\"text\" id=\"name\" aria-label=\"Name\">"
+},
+{
+    "ID": "frame-focusable-content",
+    "DescricaoGeradaPorIA": "Assegure que elementos <frame> e <iframe> com conteúdo focável não possuam 'tabindex=-1'.",
+    "ExemploDeCodigoHtml": "<iframe src=\"page.html\" tabindex=\"0\"></iframe>"
+},
+{
+"ID": "frame-title-unique",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada elemento <iframe> e <frame> possua um atributo 'title' único e descritivo.",
+    "ExemploDeCodigoHtml": "<iframe src=\"page.html"
+},
+{
+    "ID": "html-has-lang",
+    "DescricaoGeradaPorIA": "Assegure que todo documento HTML tenha o atributo 'lang'.",
+    "ExemploDeCodigoHtml": "<html lang=\"en\">...</html>"
+},
+{
+    "ID": "html-lang-valid",
+    "DescricaoGeradaPorIA": "Assegure que o atributo 'lang' do elemento <html> tenha um valor válido.",
+    "ExemploDeCodigoHtml": "<html lang=\"en\">...</html>"
+},
+{
+    "ID": "html-xml-lang-mismatch",
+    "DescricaoGeradaPorIA": "Assegure que os atributos 'lang' e 'xml:lang' em elementos HTML estejam alinhados quanto à língua base da página.",
+    "ExemploDeCodigoHtml": "<html lang=\"en\" xml:lang=\"en\">...</html>"
+},
+{
+    "ID": "image-alt",
+    "DescricaoGeradaPorIA": "Assegure que os elementos <img> tenham texto alternativo ou um papel de 'none' ou 'presentation'.",
+    "ExemploDeCodigoHtml": "<img src=\"image.jpg\" alt=\"Description\">"
+},
+{
+    "ID": "input-button-name",
+    "DescricaoGeradaPorIA": "Assegure que os botões de entrada tenham texto discernível.",
+    "ExemploDeCodigoHtml": "<input type=\"button\" value=\"Submit\">"
+},
+{
+    "ID": "input-image-alt",
+    "DescricaoGeradaPorIA": "Assegure que os elementos <input type=\"image\"> tenham texto alternativo.",
+    "ExemploDeCodigoHtml": "<input type=\"image\" src=\"button.jpg\" alt=\"Submit\">"
+},
+{
+    "ID": "label",
+    "DescricaoGeradaPorIA": "Assegure que cada elemento de formulário tenha um rótulo.",
+    "ExemploDeCodigoHtml": "<label for=\"name\">Name:</label><input type=\"text\" id=\"name\">"
+},
+{
+    "ID": "link-in-text-block",
+    "DescricaoGeradaPorIA": "Assegure que os links sejam distintos do texto ao seu redor de uma forma que não dependa da cor.",
+    "ExemploDeCodigoHtml": "<p>For more information, <a href=\"info.html\">click here</a>.</p>"
+},
+{
+    "ID": "link-name",
+    "DescricaoGeradaPorIA": "Assegure que os links tenham texto discernível.",
+    "ExemploDeCodigoHtml": "<a href=\"page.html\">Visit this page</a>"
+},
+{
+    "ID": "list",
+    "DescricaoGeradaPorIA": "Assegure que as listas estejam estruturadas corretamente.",
+    "ExemploDeCodigoHtml": "<ul><li>Item 1</li><li>Item 2</li></ul>"
+},
+{
+    "ID": "listitem",
+    "DescricaoGeradaPorIA": "Assegure que os elementos <li> sejam usados semanticamente.",
+    "ExemploDeCodigoHtml": "<ul><li>Item 1</li><li>Item 2</li></ul>"
+},
+{
+    "ID": "marquee",
+    "DescricaoGeradaPorIA": "Assegure que os elementos <marquee> não sejam utilizados.",
+    "ExemploDeCodigoHtml": "<marquee>Scrolling text</marquee>"
+},
+{
+    "ID": "meta-refresh",
+    "DescricaoGeradaPorIA": "Assegure que <meta http-equiv=\"refresh\"> não seja usado para atualização atrasada.",
+    "ExemploDeCodigoHtml": "<meta http-equiv=\"refresh\" content=\"30\">"
+},
+{
+    "ID": "meta-viewport",
+    "DescricaoGeradaPorIA": "Assegure que <meta name=\"viewport\"> não desative o redimensionamento e zoom do texto.",
+    "ExemploDeCodigoHtml": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+},
+{
+    "ID": "nested-interactive",
+    "DescricaoGeradaPorIA": "Assegure que controles interativos não estejam aninhados, pois eles podem não ser anunciados por leitores de tela ou causar problemas de foco para tecnologias assistivas.",
+    "ExemploDeCodigoHtml": "<button><a href=\"link.html\">Link</a></button>"
+},
+{
+    "ID": "no-autoplay-audio",
+    "DescricaoGeradaPorIA": "Assegure que elementos <video> ou <audio> não reproduzam áudio automaticamente por mais de 3 segundos sem um mecanismo de controle para parar ou silenciar o áudio.",
+    "ExemploDeCodigoHtml": "<video src=\"video.mp4\" controls></video>"
+},
+{
+    "ID": "object-alt",
+    "DescricaoGeradaPorIA": "Assegure que os elementos <object> tenham texto alternativo.",
+    "ExemploDeCodigoHtml": "<object data=\"file.swf\" type=\"application/x-shockwave-flash\" aria-label=\"Flash content\"></object>"
+},
+{
+    "ID": "role-img-alt",
+    "DescricaoGeradaPorIA": "Assegure que elementos [role=\"img\"] tenham texto alternativo.",
+    "ExemploDeCodigoHtml": "<div role=\"img\" aria-label=\"Image description\"></div>"
+},
+{
+    "ID": "scrollable-region-focusable",
+    "DescricaoGeradaPorIA": "Assegure que elementos que têm conteúdo rolável sejam acessíveis por teclado.",
+    "ExemploDeCodigoHtml": "<div style=\"overflow: scroll; height: 100px;\" tabindex=\"0\">Scrollable content</div>"
+},
+{
+    "ID": "select-name",
+    "DescricaoGeradaPorIA": "Assegure que o elemento select tenha um nome acessível.",
+    "ExemploDeCodigoHtml": "<select aria-label=\"Select an option\"><option value=\"1\">Option 1</option></select>"
+},
+{
+    "ID": "server-side-image-map",
+    "DescricaoGeradaPorIA": "Assegure que mapas de imagem do lado do servidor não sejam usados.",
+    "ExemploDeCodigoHtml": "<img src=\"image.jpg\" usemap=\"#map\"><map name=\"map\"><area shape=\"rect\" coords=\"34,44,270,350\" href=\"link.html\" alt=\"Description\"></map>"
+},
+{
+    "ID": "summary-name",
+    "DescricaoGeradaPorIA": "Assegure que elementos summary tenham texto discernível.",
+    "ExemploDeCodigoHtml": "<details><summary>Details summary</summary><p>Details content</p></details>"
+},
+{
+    "ID": "svg-img-alt",
+    "DescricaoGeradaPorIA": "Assegure que elementos <svg> com um papel de img, graphics-document ou graphics-symbol tenham um texto acessível.",
+    "ExemploDeCodigoHtml": "<svg role=\"img\" aria-label=\"Graphic description\">...</svg>"
+},
+{
+    "ID": "td-headers-attr",
+    "DescricaoGeradaPorIA": "Assegure que cada célula em uma tabela que usa o atributo 'headers' se refira apenas a outras células dessa tabela.",
+    "ExemploDeCodigoHtml": "<table><tr><th id=\"header1\">Header 1</th></tr><tr><td headers=\"header1\">Data</td></tr></table>"
+},
+{
+    "ID": "th-has-data-cells",
+    "DescricaoGeradaPorIA": "Assegure que elementos <th> e elementos com role=columnheader/rowheader tenham células de dados que descrevem.",
+    "ExemploDeCodigoHtml": "<table><tr><th>Header</th></tr><tr><td>Data</td></tr></table>"
+},
+{
+    "ID": "valid-lang",
+    "DescricaoGeradaPorIA": "Assegure que os atributos 'lang' tenham valores válidos.",
+    "ExemploDeCodigoHtml": "<p lang=\"en\">Text in English</p>"
+},
+{
+    "ID": "video-caption",
+    "DescricaoGeradaPorIA": "Assegure que elementos <video> tenham legendas.",
+    "ExemploDeCodigoHtml": "<video src=\"video.mp4\" controls><track kind=\"subtitles\" srclang=\"en\" label=\"English\"></track></video>"
+},
+{
+    "ID": "autocomplete-valid",
+    "DescricaoGeradaPorIA": "Assegure que o atributo 'autocomplete' esteja correto e adequado para o campo de formulário.",
+    "ExemploDeCodigoHtml": "<input type=\"text\" autocomplete=\"name\">"
+},
+{
+    "ID": "avoid-inline-spacing",
+    "DescricaoGeradaPorIA": "Assegure que o espaçamento de texto definido por atributos de estilo possa ser ajustado com folhas de estilo personalizadas.",
+    "ExemploDeCodigoHtml": "<p style=\"letter-spacing: 1px;\">Text</p>"
+},
+{
+    "ID": "target-size",
+    "DescricaoGeradaPorIA": "Assegure que os alvos de toque tenham tamanho e espaço suficientes.",
+    "ExemploDeCodigoHtml": "<button style=\"width: 50px; height: 50px;\">Button</button>"
+},
+{
+    "ID": "accesskeys",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada valor do atributo 'accesskey' seja único.",
+    "ExemploDeCodigoHtml": "<button accesskey=\"a\">Submit</button>"
+},
+{
+    "ID": "aria-allowed-role",
+    "DescricaoGeradaPorIA": "Certifique-se de que o atributo 'role' tenha um valor apropriado para o elemento.",
+    "ExemploDeCodigoHtml": "<div role=\"button\">Click Me</div>"
+},
+{
+    "ID": "aria-dialog-name",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada nó ARIA 'dialog' e 'alertdialog' tenha um nome acessível.",
+    "ExemploDeCodigoHtml": "<div role=\"dialog\" aria-label=\"Dialog Title\">Content</div>"
+},
+{
+    "ID": "aria-text",
+    "DescricaoGeradaPorIA": "Certifique-se de que o role='text' seja usado em elementos sem descendentes focáveis.",
+    "ExemploDeCodigoHtml": "<div role=\"text\">Some descriptive text</div>"
+},
+{
+    "ID": "aria-treeitem-name",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada nó ARIA 'treeitem' tenha um nome acessível.",
+    "ExemploDeCodigoHtml": "<div role=\"treeitem\" aria-label=\"Tree Item\">Item</div>"
+},
+{
+    "ID": "empty-heading",
+    "DescricaoGeradaPorIA": "Certifique-se de que os cabeçalhos tenham texto discernível.",
+    "ExemploDeCodigoHtml": "<h1>Title</h1>"
+},
+{
+    "ID": "empty-table-header",
+    "DescricaoGeradaPorIA": "Certifique-se de que os cabeçalhos de tabela tenham texto discernível.",
+    "ExemploDeCodigoHtml": "<th>Header</th>"
+},
+{
+    "ID": "frame-tested",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos <iframe> e <frame> contenham o script axe-core.",
+    "ExemploDeCodigoHtml": "<iframe src=\"page.html\" title=\"Description\"></iframe>"
+},
+{
+    "ID": "heading-order",
+    "DescricaoGeradaPorIA": "Certifique-se de que a ordem dos cabeçalhos seja semanticamente correta.",
+    "ExemploDeCodigoHtml": "<h1>Main Heading</h1><h2>Subheading</h2>"
+},
+{
+    "ID": "image-redundant-alt",
+    "DescricaoGeradaPorIA": "Certifique-se de que a alternativa para imagens não seja repetida como texto.",
+    "ExemploDeCodigoHtml": "<img src=\"image.jpg\" alt=\"Description\">"
+},
+{
+    "ID": "label-title-only",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada elemento de formulário tenha um rótulo visível e não seja rotulado apenas com rótulos ocultos, atributos 'title' ou 'aria-describedby'.",
+    "ExemploDeCodigoHtml": "<label for=\"input\">Input Label</label><input id=\"input\" type=\"text\">"
+},
+{
+    "ID": "landmark-banner-is-top-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que o marco de banner esteja no nível superior.",
+    "ExemploDeCodigoHtml": "<header role=\"banner\">Banner Content</header>"
+},
+{
+    "ID": "landmark-complementary-is-top-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que o marco complementar ou aside esteja no nível superior.",
+    "ExemploDeCodigoHtml": "<aside role=\"complementary\">Complementary Content</aside>"
+},
+{
+    "ID": "landmark-contentinfo-is-top-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que o marco contentinfo esteja no nível superior.",
+    "ExemploDeCodigoHtml": "<footer role=\"contentinfo\">Content Info</footer>"
+},
+{
+    "ID": "landmark-main-is-top-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que o marco main esteja no nível superior.",
+    "ExemploDeCodigoHtml": "<main>Main Content</main>"
+},
+{
+    "ID": "landmark-no-duplicate-banner",
+    "DescricaoGeradaPorIA": "Certifique-se de que o documento tenha no máximo um marco de banner.",
+    "ExemploDeCodigoHtml": "<header role=\"banner\">Banner Content</header>"
+},
+{
+    "ID": "landmark-no-duplicate-contentinfo",
+    "DescricaoGeradaPorIA": "Certifique-se de que o documento tenha no máximo um marco contentinfo.",
+    "ExemploDeCodigoHtml": "<footer role=\"contentinfo\">Content Info</footer>"
+},
+{
+    "ID": "landmark-no-duplicate-main",
+    "DescricaoGeradaPorIA": "Certifique-se de que o documento tenha no máximo um marco main.",
+    "ExemploDeCodigoHtml": "<main>Main Content</main>"
+},
+{
+    "ID": "landmark-one-main",
+    "DescricaoGeradaPorIA": "Certifique-se de que o documento tenha um marco main.",
+    "ExemploDeCodigoHtml": "<main>Main Content</main>"
+},
+{
+    "ID": "landmark-unique",
+    "DescricaoGeradaPorIA": "Certifique-se de que os marcos sejam únicos.",
+    "ExemploDeCodigoHtml": "<header role=\"banner\">Banner</header><footer role=\"contentinfo\">Footer</footer>"
+},
+{
+    "ID": "meta-viewport-large",
+    "DescricaoGeradaPorIA": "Certifique-se de que <meta name=\"viewport\"> possa escalar uma quantidade significativa.",
+    "ExemploDeCodigoHtml": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+},
+{
+    "ID": "page-has-heading-one",
+    "DescricaoGeradaPorIA": "Certifique-se de que a página, ou pelo menos um de seus quadros, contenha um cabeçalho de nível um.",
+    "ExemploDeCodigoHtml": "<h1>Main Heading</h1>"
+},
+{
+    "ID": "presentation-role-conflict",
+    "DescricaoGeradaPorIA": "Elementos marcados como apresentacionais não devem ter ARIA global ou tabindex para garantir que todos os leitores de tela os ignorem.",
+    "ExemploDeCodigoHtml": "<div role=\"presentation\" tabindex=\"-1\">Presentation Content</div>"
+},
+{
+    "ID": "region",
+    "DescricaoGeradaPorIA": "Certifique-se de que todo o conteúdo da página esteja contido por marcos.",
+    "ExemploDeCodigoHtml": "<header>Header Content</header><main>Main Content</main><footer>Footer Content</footer>"
+},
+{
+    "ID": "scope-attr-valid",
+    "DescricaoGeradaPorIA": "Certifique-se de que o atributo 'scope' seja usado corretamente em tabelas.",
+    "ExemploDeCodigoHtml": "<th scope=\"col\">Column Header</th>"
+},
+{
+    "ID": "skip-link",
+    "DescricaoGeradaPorIA": "Certifique-se de que todos os links de pular tenham um alvo focável.",
+    "ExemploDeCodigoHtml": "<a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>"
+},
+{
+    "ID": "tabindex",
+    "DescricaoGeradaPorIA": "Certifique-se de que os valores do atributo tabindex não sejam maiores que 0.",
+    "ExemploDeCodigoHtml": "<button tabindex=\"0\">Button</button>"
+},
+{
+    "ID": "table-duplicate-name",
+    "DescricaoGeradaPorIA": "Certifique-se de que o elemento <caption> não contenha o mesmo texto que o atributo summary.",
+    "ExemploDeCodigoHtml": "<table><caption>Table Caption</caption><summary>Table Summary</summary></table>"
+},
+{
+    "ID": "color-contrast-enhanced",
+    "DescricaoGeradaPorIA": "Certifique-se de que o contraste entre cores de primeiro plano e plano de fundo atenda aos limiares de contraste aprimorados WCAG 2 AAA.",
+    "ExemploDeCodigoHtml": "<p style=\"color:#000; background-color:#FFF;\">Text</p>"
+},
+{
+    "ID": "identical-links-same-purpose",
+    "DescricaoGeradaPorIA": "Certifique-se de que links com o mesmo nome acessível sirvam a um propósito similar.",
+    "ExemploDeCodigoHtml": "<a href=\"link1.html\">Go to Link</a><a href=\"link2.html\">Go to Link</a>"
+},
+{
+    "ID": "meta-refresh-no-exceptions",
+    "DescricaoGeradaPorIA": "Certifique-se de que <meta http-equiv=\"refresh\"> não seja usado para atualização atrasada.",
+    "ExemploDeCodigoHtml": "<meta http-equiv=\"refresh\" content=\"10\">"
+},
+{
+    "ID": "css-orientation-lock",
+    "DescricaoGeradaPorIA": "Certifique-se de que o conteúdo não esteja bloqueado em nenhuma orientação de exibição específica e que o conteúdo seja operável em todas as orientações de exibição.",
+    "ExemploDeCodigoHtml": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=yes\">"
+},
+{
+    "ID": "focus-order-semantics",
+    "DescricaoGeradaPorIA": "Certifique-se de que os elementos na ordem de foco tenham um papel apropriado para o conteúdo interativo.",
+    "ExemploDeCodigoHtml": "<button tabindex=\"1\">Click Me</button><a href=\"#\" tabindex=\"2\">Link</a>"
+},
+{
+    "ID": "hidden-content",
+    "DescricaoGeradaPorIA": "Informa os usuários sobre conteúdo oculto.",
+    "ExemploDeCodigoHtml": "<div style=\"display:none;\">Hidden Content</div>"
+},
+{
+    "ID": "label-content-name-mismatch",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos rotulados através de seu conteúdo tenham seu texto visível como parte de seu nome acessível.",
+    "ExemploDeCodigoHtml": "<label for=\"input\">Input Label</label><input id=\"input\" type=\"text\" aria-label=\"Input Label\">"
+},
+{
+    "ID": "p-as-heading",
+    "DescricaoGeradaPorIA": "Certifique-se de que texto em negrito, itálico e tamanho de fonte não seja usado para estilizar elementos <p> como um cabeçalho.",
+    "ExemploDeCodigoHtml": "<p style=\"font-size:24px; font-weight:bold;\">Not a Heading</p>"
+},
+{
+    "ID": "table-fake-caption",
+    "DescricaoGeradaPorIA": "Certifique-se de que tabelas com uma legenda usem o elemento <caption>.",
+    "ExemploDeCodigoHtml": "<table><caption>Table Caption</caption><tr><td>Data</td></tr></table>"
+},
+{
+    "ID": "td-has-header",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada célula de dados não vazia em uma <table> maior que 3 por 3 tenha um ou mais cabeçalhos de tabela.",
+    "ExemploDeCodigoHtml": "<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Data 1</td><td>Data 2</td></tr></tbody></table>"
+},
+{
+    "ID": "aria-roledescription",
+    "DescricaoGeradaPorIA": "Certifique-se de que 'aria-roledescription' seja usado apenas em elementos com um papel implícito ou explícito.",
+    "ExemploDeCodigoHtml": "<div role=\"button\" aria-roledescription=\"Custom Button\">Click Me</div>"
+},
+{
+    "ID": "audio-caption",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos <audio> tenham legendas.",
+    "ExemploDeCodigoHtml": "<audio controls><source src=\"audio.mp3\" type=\"audio/mp3\"><track src=\"captions.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English\"></audio>"
+},
+{
+    "ID": "duplicate-id-active",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada valor do atributo id dos elementos ativos seja único.",
+    "ExemploDeCodigoHtml": "<button id=\"unique-id\">Button</button>"
+},
+{
+    "ID": "duplicate-id",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada valor do atributo id seja único.",
+    "ExemploDeCodigoHtml": "<div id=\"unique-id\">Content</div>"
+},
+{
+    "ID": "focusable-not-tabbable",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos focáveis possam ser navegados usando a tecla Tab.",
+    "ExemploDeCodigoHtml": "<input type=\"text\" tabindex=\"1\">"
+},
+{
+    "ID": "page-no-duplicate-banner",
+    "DescricaoGeradaPorIA": "Certifique-se de que a página tenha no máximo um elemento de banner.",
+    "ExemploDeCodigoHtml": "<header role=\"banner\">Site Banner</header>"
+},
+{
+    "ID": "page-has-main",
+    "DescricaoGeradaPorIA": "Certifique-se de que a página ou um de seus frames contenha um elemento principal.",
+    "ExemploDeCodigoHtml": "<main>Main Content</main>"
+},
+{
+    "ID": "landmark-is-unique",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada ponto de referência na página seja único.",
+    "ExemploDeCodigoHtml": "<nav role=\"navigation\">Navigation</nav><header role=\"banner\">Header</header>"
+},
+{
+    "ID": "region",
+    "DescricaoGeradaPorIA": "Certifique-se de que todo o conteúdo da página esteja contido por pontos de referência.",
+    "ExemploDeCodigoHtml": "<aside role=\"complementary\">Sidebar</aside>"
+},
+{
+    "ID": "aria-conditional-attr",
+    "DescricaoGeradaPorIA": "Certifique-se de que atributos ARIA condicionais sejam usados corretamente com base em seu papel.",
+    "ExemploDeCodigoHtml": "<div role=\"dialog\" aria-hidden=\"false\">Dialog Content</div>"
+},
+{
+    "ID": "focusable-modal-open",
+    "DescricaoGeradaPorIA": "Certifique-se de que os elementos focáveis em modais estejam acessíveis quando o modal estiver aberto.",
+    "ExemploDeCodigoHtml": "<div role=\"dialog\" aria-hidden=\"false\"><button>Close</button></div>"
+},
+{
+    "ID": "focusable-disabled",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos focáveis desativados não possam receber foco.",
+    "ExemploDeCodigoHtml": "<button disabled>Disabled Button</button>"
+},
+{
+    "ID": "aria-prohibited-attr",
+    "DescricaoGeradaPorIA": "Certifique-se de que atributos ARIA proibidos não sejam usados nos elementos.",
+    "ExemploDeCodigoHtml": "<div role=\"alert\" aria-atomic=\"true\">Alert</div>"
+},
+{
+    "ID": "aria-errormessage",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos que possuem uma mensagem de erro usem o atributo aria-errormessage corretamente.",
+    "ExemploDeCodigoHtml": "<input aria-errormessage=\"error-message\" aria-invalid=\"true\"><span id=\"error-message\">Error</span>"
+},
+{
+    "ID": "aria-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que o atributo aria-level é usado corretamente para indicar a estrutura hierárquica.",
+    "ExemploDeCodigoHtml": "<h2 aria-level=\"2\">Subheading</h2>"
+},
+{
+    "ID": "important-letter-spacing",
+    "DescricaoGeradaPorIA": "Certifique-se de que o espaçamento entre letras importante não seja aplicado através de atributos inline.",
+    "ExemploDeCodigoHtml": "<p style=\"letter-spacing: 2px;\">Text</p>"
+},
+{
+    "ID": "important-word-spacing",
+    "DescricaoGeradaPorIA": "Certifique-se de que o espaçamento entre palavras importante não seja aplicado através de atributos inline.",
+    "ExemploDeCodigoHtml": "<p style=\"word-spacing: 4px;\">Text</p>"
+},
+{
+    "ID": "important-line-height",
+    "DescricaoGeradaPorIA": "Certifique-se de que a altura da linha importante não seja aplicada através de atributos inline.",
+    "ExemploDeCodigoHtml": "<p style=\"line-height: 1.5;\">Text</p>"
+},
+{
+    "ID": "button-has-visible-text",
+    "DescricaoGeradaPorIA": "Certifique-se de que botões tenham texto visível.",
+    "ExemploDeCodigoHtml": "<button>Submit</button>"
+},
+{
+    "ID": "internal-link-present",
+    "DescricaoGeradaPorIA": "Certifique-se de que links internos estejam presentes e funcionais.",
+    "ExemploDeCodigoHtml": "<a href=\"#section\">Go to Section</a>"
+},
+{
+    "ID": "header-present",
+    "DescricaoGeradaPorIA": "Certifique-se de que um elemento de cabeçalho esteja presente na página.",
+    "ExemploDeCodigoHtml": "<header>Site Header</header>"
+},
+{
+    "ID": "doc-has-title",
+    "DescricaoGeradaPorIA": "Certifique-se de que o documento tenha um título.",
+    "ExemploDeCodigoHtml": "<title>Document Title</title>"
+},
+{
+    "ID": "has-visible-text",
+    "DescricaoGeradaPorIA": "Certifique-se de que todos os elementos importantes tenham texto visível.",
+    "ExemploDeCodigoHtml": "<p>Visible Text</p>"
+},
+{
+    "ID": "html-lang-valid",
+    "DescricaoGeradaPorIA": "Certifique-se de que o atributo lang do elemento <html> tenha um valor válido.",
+    "ExemploDeCodigoHtml": "<html lang=\"en\">Content</html>"
+},
+{
+    "ID": "has-alt",
+    "DescricaoGeradaPorIA": "Certifique-se de que imagens tenham um texto alternativo.",
+    "ExemploDeCodigoHtml": "<img src=\"image.jpg\" alt=\"Description\">"
+},
+{
+    "ID": "non-empty-title",
+    "DescricaoGeradaPorIA": "Certifique-se de que o título do documento não esteja vazio.",
+    "ExemploDeCodigoHtml": "<title>Page Title</title>"
+},
+{
+    "ID": "presentational-role",
+    "DescricaoGeradaPorIA": "Certifique-se de que elementos com papel presentacional não tenham atributos ARIA globais ou tabindex.",
+    "ExemploDeCodigoHtml": "<div role=\"presentation\">Content</div>"
+},
+{
+    "ID": "explicit-label",
+    "DescricaoGeradaPorIA": "Certifique-se de que cada elemento de formulário tenha um rótulo explícito.",
+    "ExemploDeCodigoHtml": "<label for=\"input\">Input</label><input id=\"input\" type=\"text\">"
+},
+{
+    "ID": "landmark-is-top-level",
+    "DescricaoGeradaPorIA": "Certifique-se de que os pontos de referência estejam no nível mais alto possível.",
+    "ExemploDeCodigoHtml": "<header role=\"banner\">Banner</header>"
+},
+{
+    "ID": "page-no-duplicate-contentinfo",
+    "DescricaoGeradaPorIA": "Certifique-se de que a página tenha no máximo um elemento de conteúdo de informação.",
+    "ExemploDeCodigoHtml": "<footer role=\"contentinfo\">Content Info</footer>"
+},
+{
+    "ID": "no-focusable-content",
+    "DescricaoGeradaPorIA": "Certifique-se de que o conteúdo não possa receber foco se não for interativo.",
+    "ExemploDeCodigoHtml": "<div tabindex=\"-1\">Non-focusable Content</div>"
+},
+{
+    "ID": "focusable-content",
+    "DescricaoGeradaPorIA": "Certifique-se de que o conteúdo focável possa ser acessado pelo teclado.",
+    "ExemploDeCodigoHtml": "<input type=\"text\" tabindex=\"0\">"
+},
+{
+    "ID": "page-no-duplicate-main",
+    "DescricaoGeradaPorIA": "Certifique-se de que a página tenha no máximo um elemento principal.",
+    "ExemploDeCodigoHtml": "<main>Main Content</main>"
+},
+{
+    "ID": "aria-label",
+    "DescricaoGeradaPorIA": "Certifique-se de que todos os elementos interativos tenham um atributo aria-label apropriado.",
+    "ExemploDeCodigoHtml": "<button aria-label=\"Close\">X</button>"
+}
+]
