@@ -177,7 +177,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
         private ExcelWorksheet CriarAbaRelatorio(ExcelWorksheet plan, string nomeServicoTestado)
         {
             plan.Cells["a1"].Value = "MCD Acessibilidade relatório completo";
-            plan.Cells["a1:l1"].Merge = true;
+            plan.Cells["a1:n1"].Merge = true;
             plan.Cells["a1"].Style.Font.Bold = true;
             plan.Cells["a1"].Style.Font.Size = 16;
             plan.Cells["a1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
@@ -185,7 +185,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
             plan.Cells["a1"].Style.Fill.BackgroundColor.SetColor(Color.LightBlue); // Fundo azul claro
             plan.Cells["a1"].Style.Border.BorderAround(ExcelBorderStyle.Thick, Color.Black); // Bordas espessas
 
-            // Serviço analisado
+            
             plan.Cells["a2"].Value = "Serviço analisado";
             plan.Cells["a2:f2"].Merge = true;
             plan.Cells["a2"].Style.Font.Bold = true;
@@ -196,7 +196,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
             // Nome do serviço analisado
             plan.Cells["g2"].Value = nomeServicoTestado;
-            plan.Cells["g2:l2"].Merge = true;
+            plan.Cells["g2:n2"].Merge = true;
             plan.Cells["g2"].Style.Font.Bold = true;
             plan.Cells["g2"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             plan.Cells["g2"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
@@ -214,7 +214,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
             // Data atual formatada
             plan.Cells["g3"].Value = System.DateTime.Now.ToString("dd/MM/yyyy");
-            plan.Cells["g3:l3"].Merge = true;
+            plan.Cells["g3:n3"].Merge = true;
             plan.Cells["g3"].Style.Font.Bold = true;
             plan.Cells["g3"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             plan.Cells["g3"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
@@ -231,7 +231,7 @@ namespace PocAutomacaoAcessibilidade.PocAutomacaoAcessibilidade.Aplication.Servi
 
 
             plan.Cells["g4"].Value = Utils.Utils.ObterNomeUsuario();
-            plan.Cells["g4:l4"].Merge = true;
+            plan.Cells["g4:n4"].Merge = true;
             plan.Cells["g4"].Style.Font.Bold = true;
             plan.Cells["g4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             plan.Cells["g4"].Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Fundo cinza claro
